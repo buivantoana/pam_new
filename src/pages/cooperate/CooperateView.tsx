@@ -1,0 +1,25 @@
+import { Box, useMediaQuery, useTheme } from '@mui/material'
+import React from 'react'
+import BannerBrandPartners from './BannerBrandPartners'
+import PartnersSection from './PartnersSection'
+import AudienceSection from './AudienceSection'
+import TopContentSection from './TopContentSection'
+import IPCardSection from './IPCardSection'
+
+type Props = {}
+
+const CooperateView = (props: Props) => {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  return (
+    <Box pt={isMobile ? 10 : "90px"}>
+        <BannerBrandPartners/>
+        <PartnersSection/>
+        <AudienceSection/>
+        <TopContentSection/>
+        <IPCardSection/>
+    </Box>
+  )
+}
+
+export default CooperateView
