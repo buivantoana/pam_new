@@ -11,9 +11,18 @@ import {
   Pagination,
   IconButton,
   Container,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import img1 from '../../images/f9ba8517ad4dadbc18b9e3832b3d8ac162433c9e.png';
+import img1 from "../../images/f9ba8517ad4dadbc18b9e3832b3d8ac162433c9e.png";
+import vector1 from "../../images/Vector (1).png";
+import vector2 from "../../images/Vector (2).png";
+import vector3 from "../../images/Vector (3).png";
+import vector4 from "../../images/Vector.png";
+import vector5 from "../../images/Element 8.png";
+import vector6 from "../../images/khangia2.png";
+import { useNavigate } from "react-router-dom";
 const dummyNews = Array.from({ length: 18 }, (_, i) => ({
   id: i + 1,
   title: "Lorem Ipsum is simply dummy text...",
@@ -24,9 +33,11 @@ const dummyNews = Array.from({ length: 18 }, (_, i) => ({
 }));
 
 const NewsView = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-
+  const navigate = useNavigate();
   const itemsPerPage = 9;
   const filteredNews = dummyNews.filter((item) =>
     item.title.toLowerCase().includes(search.toLowerCase())
@@ -37,72 +48,145 @@ const NewsView = () => {
   );
 
   return (
-    <Box pt={{xs:"100px", md:"120px"}} sx={{  py: 5,  background: 'linear-gradient(to bottom, #fff5f0, white)' }}>
-        <Container maxWidth="lg">
+    <Box
+      pt={{ xs: "100px", md: "120px" }}
+      sx={{
+        py: 5,
+        background: "linear-gradient(to bottom, #fff5f0, white)",
+        position: "relative",
+      }}>
+      <Box
+        component='img'
+        src={vector2}
+        alt='Avatar 1'
+        sx={{
+          display: isMobile ? "none" : "block",
+          position: "absolute",
+          top: isMobile ? 80 : "50%",
+          left: 0,
+          width: isMobile ? 100 : "unset",
+        }}
+      />
+      <Box
+        component='img'
+        src={vector1}
+        alt='Avatar 1'
+        sx={{
+          display: isMobile ? "none" : "block",
+          position: "absolute",
+          top: isMobile ? 80 : "5%",
+          left: 0,
+          width: isMobile ? 100 : "unset",
+        }}
+      />
 
-      <Box display="flex" flexDirection={{xs:"column",md:"row"}} justifyContent="space-between" alignItems="center" mb={3}>
-        <Typography variant="h3" fontWeight="bold" color="#FF6119">
-          Tin tức
-        </Typography>
-        <TextField
-          placeholder="Search"
-          size="small"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-            sx: {
-              borderRadius: 2,
-              background: "#f4f4f4",
-            },
-          }}
-        />
-      </Box>
+      <Box
+        component='img'
+        src={vector4}
+        alt='Avatar 1'
+        sx={{
+          display: isMobile ? "none" : "block",
+          position: "absolute",
+          top: isMobile ? 80 : "10%",
+          right: 0,
+          width: isMobile ? 100 : "unset",
+        }}
+      />
+      <Box
+        component='img'
+        src={vector5}
+        alt='Avatar 1'
+        sx={{
+          display: isMobile ? "none" : "block",
+          position: "absolute",
+          top: isMobile ? 80 : "70%",
+          right: 0,
+          width: isMobile ? 100 : "unset",
+        }}
+      />
 
-      <Grid container spacing={3}>
-        {paginatedNews.map((item) => (
-          <Grid item xs={12} sm={6} md={4} key={item.id}>
-            <Card sx={{ borderRadius: 2, boxShadow: 2,padding:"0 !important" }}>
-              <CardMedia
-                component="img"
-                height="200"
-                image={item.image}
-                alt="news image"
-              />
-              <CardContent>
-                <Typography variant="subtitle1" fontWeight={600} gutterBottom noWrap>
-                  {item.title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ minHeight: 48 }}>
-                  {item.content}
-                </Typography>
-                <Typography
-                  variant="caption"
-                  color="text.secondary"
-                  sx={{ display: "block", mt: 1 }}
-                >
-                  {item.date}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+      <Container maxWidth='lg'>
+        <Box
+          display='flex'
+          flexDirection={{ xs: "column", md: "row" }}
+          justifyContent='space-between'
+          alignItems='center'
+          mb={3}>
+          <Typography variant='h3' fontWeight='bold' color='#FF6119'>
+            Tin tức
+          </Typography>
+          <TextField
+            placeholder='Search'
+            size='small'
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position='start'>
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+              sx: {
+                borderRadius: 2,
+                background: "#f4f4f4",
+              },
+            }}
+          />
+        </Box>
 
-      <Box display="flex" justifyContent="center" mt={5}>
-        <Pagination
-          count={Math.ceil(filteredNews.length / itemsPerPage)}
-          page={page}
-          onChange={(e, value) => setPage(value)}
-          shape="rounded"
-          color="primary"
-        />
-      </Box>
-        </Container>
+        <Grid container spacing={3}>
+          {paginatedNews.map((item) => (
+            <Grid
+              item
+              onClick={() => navigate("/detail-new")}
+              xs={12}
+              sm={6}
+              md={4}
+              key={item.id}>
+              <Card
+                sx={{ borderRadius: 2, boxShadow: 2, padding: "0 !important" }}>
+                <CardMedia
+                  component='img'
+                  height='200'
+                  image={item.image}
+                  alt='news image'
+                />
+                <CardContent>
+                  <Typography
+                    variant='subtitle1'
+                    fontWeight={600}
+                    gutterBottom
+                    noWrap>
+                    {item.title}
+                  </Typography>
+                  <Typography
+                    variant='body2'
+                    color='text.secondary'
+                    sx={{ minHeight: 48 }}>
+                    {item.content}
+                  </Typography>
+                  <Typography
+                    variant='caption'
+                    color='text.secondary'
+                    sx={{ display: "block", mt: 1 }}>
+                    {item.date}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+
+        <Box display='flex' justifyContent='center' mt={5}>
+          <Pagination
+            count={Math.ceil(filteredNews.length / itemsPerPage)}
+            page={page}
+            onChange={(e, value) => setPage(value)}
+            shape='rounded'
+            color='primary'
+          />
+        </Box>
+      </Container>
     </Box>
   );
 };
