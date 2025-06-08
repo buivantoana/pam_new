@@ -79,11 +79,69 @@ const Header = () => {
                   bgcolor='white'
                   boxShadow={3}
                   zIndex={1}>
-                  <MenuItem onClick={handleMenuClose}>Về chúng tôi</MenuItem>
-                  <MenuItem onClick={handleMenuClose}>Kênh</MenuItem>
-                  <MenuItem onClick={handleMenuClose}>Hợp tác</MenuItem>
-                  <MenuItem onClick={handleMenuClose}>Tuyển dụng</MenuItem>
-                  <MenuItem onClick={handleMenuClose}>Tin tức</MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      navigate("/");
+                      handleMenuClose();
+                    }}
+                    sx={{
+                      cursor: "pointer",
+                      color: currentPath === "/" ? "#f26522" : "inherit",
+                      fontWeight: currentPath === "/" ? "700" : "500",
+                    }}>
+                    Về chúng tôi
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      navigate("/chanel");
+                      handleMenuClose();
+                    }}
+                    sx={{
+                      cursor: "pointer",
+                      color: currentPath === "/chanel" ? "#f26522" : "inherit",
+                      fontWeight: currentPath === "/chanel" ? "700" : "500",
+                    }}>
+                    Kênh
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      navigate("/cooperate");
+                      handleMenuClose();
+                    }}
+                    sx={{
+                      cursor: "pointer",
+                      color:
+                        currentPath === "/cooperate" ? "#f26522" : "inherit",
+                      fontWeight: currentPath === "/cooperate" ? "700" : "500",
+                    }}>
+                    Hợp tác
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      navigate("/recruitment");
+                      handleMenuClose();
+                    }}
+                    sx={{
+                      cursor: "pointer",
+                      color:
+                        currentPath === "/recruitment" ? "#f26522" : "inherit",
+                      fontWeight:
+                        currentPath === "/recruitment" ? "700" : "500",
+                    }}>
+                    Tuyển dụng
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      navigate("/news");
+                      handleMenuClose();
+                    }}
+                    sx={{
+                      cursor: "pointer",
+                      color: currentPath === "/news" ? "#f26522" : "inherit",
+                      fontWeight: currentPath === "/news" ? "700" : "500",
+                    }}>
+                    Tin tức
+                  </MenuItem>
                   <MenuItem>
                     <Button
                       variant='outlined'

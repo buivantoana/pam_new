@@ -61,8 +61,8 @@ const Banner = () => {
       {[
         {
           src: bannerLeftTop,
-          top: isMobile ? 80 : 100,
-          left: isMobile ? -20 : 150,
+          top: isMobile ? 100 : 100,
+          left: isMobile ? 0 : 150,
         },
         { src: vector2, top: 300, left: 350, hiddenMobile: true },
         { src: icon_left, top: 120, left: 0, hiddenMobile: true },
@@ -70,17 +70,17 @@ const Banner = () => {
         { src: vector, bottom: 200, left: 0, hiddenMobile: true },
         {
           src: bannerLeftBottom,
-          bottom: isMobile ? "40vh" : 150,
-          left: isMobile ? -20 : 130,
+          bottom: isMobile ? "40%" : 150,
+          left: isMobile ? 0 : 130,
         },
-        { src: bannerRightTop, top: 50, right: isMobile ? -20 : 150 },
+        { src: bannerRightTop, top: 80, right: isMobile ? 0 : 150 },
         { src: icon_right1, top: 100, right: 360, hiddenMobile: true },
         { src: icon_right, top: 350, right: 0, hiddenMobile: true },
         { src: vector3, top: 150, right: 0, hiddenMobile: true },
         {
           src: bannerRightBottom,
-          bottom: isMobile ? "40vh" : 120,
-          right: isMobile ? -30 : 150,
+          bottom: isMobile ? "40%" : 120,
+          right: isMobile ? 0 : 150,
         },
       ].map((img, idx) => {
         const styles: any = {

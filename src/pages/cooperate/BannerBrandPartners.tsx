@@ -7,6 +7,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { motion } from "framer-motion";
+import banner from "../../images/1fa47c58664fc06c9fc374d0ccb62914013f9d63.png";
 
 const BannerBrandPartners = () => {
   const theme = useTheme();
@@ -22,7 +23,7 @@ const BannerBrandPartners = () => {
         position: "relative",
         width: "100%",
         height: { xs: "100%", md: "450px" },
-        backgroundImage: `url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d')`,
+        backgroundImage: `url('${banner}')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         display: "flex",
