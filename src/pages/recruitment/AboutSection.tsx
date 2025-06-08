@@ -79,6 +79,7 @@ const AboutSection = () => {
           top: isMobile ? 80 : 20,
           left: "48vw",
           width: isMobile ? 100 : "unset",
+          display: isMobile ? "none" : "block",
         }}
         initial='hidden'
         whileInView='visible'
