@@ -46,7 +46,7 @@ import {
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import "../../App.css";
 import profile from "../../images/facebook-cap-nhat-avatar-doi-voi-tai-khoan-khong-su-dung-anh-dai-dien-e4abd14d.jpg";
-import logo from "../../images/loading-lines-6747317-5601928.webp";
+import logo from "../../images/dabeb7fcebd00c596297e51a1cf6134d57e64622.png";
 
 const drawerWidth = 240;
 
@@ -269,7 +269,7 @@ const LayoutAdmin = () => {
                 src={logo}
                 width={80}
                 height={80}
-                style={{ objectFit: "contain" }}
+                style={{ objectFit: "contain", borderRadius: "8px" }}
                 alt=''
               />
               <IconButton onClick={handleDrawerClose}>
@@ -301,7 +301,7 @@ const LayoutAdmin = () => {
                         sx={{ display: "flex", justifyContent: "center" }}>
                         <RiLineChartFill color={"white"} />
                       </ListItemIcon>
-                      <ListItemText primary={"Tổng quan"} />
+                      <ListItemText primary={"Bài viết"} />
                     </CustomListItemButton>
                   </Link>
                 </ListItem>
@@ -326,7 +326,7 @@ const LayoutAdmin = () => {
                         sx={{ display: "flex", justifyContent: "center" }}>
                         <RiUser3Fill color={"white"} />
                       </ListItemIcon>
-                      <ListItemText primary={"Người dùng"} />
+                      <ListItemText primary={"Danh mục"} />
                     </CustomListItemButton>
                   </Link>
                 </ListItem>
@@ -351,7 +351,7 @@ const LayoutAdmin = () => {
                         sx={{ display: "flex", justifyContent: "center" }}>
                         <RiSecurePaymentFill color={"white"} />
                       </ListItemIcon>
-                      <ListItemText primary={"Thanh toán"} />
+                      <ListItemText primary={"Người dùng"} />
                     </CustomListItemButton>
                   </Link>
                 </ListItem>

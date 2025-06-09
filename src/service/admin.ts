@@ -1,17 +1,11 @@
-import axios from "axios";
-import { url_voice } from "../config";
+import api from "../core/api";
 
-export async function dashBoard({ name, password }: any) {
+export async function Login({ email, password }: any) {
   try {
-    const response = await axios.post(
-      `${url_voice}/admin/login`,
-      { name, password },
-      {
-        headers: {
-          Authorization: "Bearer dHRzb3BlbmFpeGluY2hhb2NhY2JhbmdtdjEyMzQ1Ng==",
-        },
-      }
-    );
+    const response = await api.post(`/users/login`, {
+      email,
+      password,
+    });
     return response.data;
   } catch (error: any) {
     if (error.response) {

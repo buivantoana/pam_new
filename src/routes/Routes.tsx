@@ -15,6 +15,8 @@ import NewsController from "../pages/news/NewsController";
 import DetailNewController from "../pages/detail_new/DetailNewController";
 import ChanelController from "../pages/chanel/ChanelController";
 import ScrollToTop from "../components/ScrollToTop";
+import CategoryController from "../pages/admin/category/CategoryController";
+import PostsController from "../pages/admin/posts/PostsController";
 
 const Router = () => {
   const context: any = useCoursesContext();
@@ -35,7 +37,9 @@ const Router = () => {
           <Route path='/chanel' element={<ChanelController />} />
         </Route>
         <Route path='/admin' element={<LayoutAdmin />}>
-          <Route path='' element={<DashBoardController />} />
+          <Route path='login' element={<DashBoardController />} />
+          <Route path='category' element={<CategoryController />} />
+          <Route path='post' element={<PostsController />} />
         </Route>
         {/* <Route path='reset-password' element={<ResetPasswordController />} /> */}
 
