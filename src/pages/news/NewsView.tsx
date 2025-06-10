@@ -13,6 +13,7 @@ import {
   Container,
   useTheme,
   useMediaQuery,
+  Skeleton,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import img1 from "../../images/f9ba8517ad4dadbc18b9e3832b3d8ac162433c9e.png";
@@ -23,23 +24,22 @@ import vector4 from "../../images/Vector.png";
 import vector5 from "../../images/Element 8.png";
 import vector6 from "../../images/khangia2.png";
 import { useNavigate } from "react-router-dom";
-const dummyNews = Array.from({ length: 18 }, (_, i) => ({
-  id: i + 1,
-  title: "Lorem Ipsum is simply dummy text...",
-  content:
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-  date: "05/06/2025",
-  image: img1,
-}));
+import { formattedDateHHMMDDMMYYYY } from "../../utils/utils";
+import { motion } from "framer-motion";
+const fadeSlideUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
 
-const NewsView = () => {
+
+const NewsView = ({ posts, loading }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
   const itemsPerPage = 9;
-  const filteredNews = dummyNews.filter((item) =>
+  const filteredNews = posts.filter((item) =>
     item.title.toLowerCase().includes(search.toLowerCase())
   );
   const paginatedNews = filteredNews.slice(
@@ -135,57 +135,81 @@ const NewsView = () => {
         </Box>
 
         <Grid container spacing={3}>
-          {paginatedNews.map((item) => (
-            <Grid
-              item
-              onClick={() => navigate("/detail-new")}
-              xs={12}
-              sm={6}
-              md={4}
-              key={item.id}>
-              <Card
-                sx={{ borderRadius: 2, boxShadow: 2, padding: "0 !important" }}>
-                <CardMedia
-                  component='img'
-                  height='200'
-                  image={item.image}
-                  alt='news image'
-                />
-                <CardContent>
-                  <Typography
-                    variant='subtitle1'
-                    fontWeight={600}
-                    gutterBottom
-                    noWrap>
-                    {item.title}
-                  </Typography>
-                  <Typography
-                    variant='body2'
-                    color='text.secondary'
-                    sx={{ minHeight: 48 }}>
-                    {item.content}
-                  </Typography>
-                  <Typography
-                    variant='caption'
-                    color='text.secondary'
-                    sx={{ display: "block", mt: 1 }}>
-                    {item.date}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
+          {loading
+            ? Array.from({ length: itemsPerPage }).map((_, index) => (
+                <Grid item xs={12} sm={6} md={4} key={index}>
+                  <Skeleton variant='rectangular' sx={{borderRadius:3}} height={250} />
+                  <Skeleton height={30} />
+                  <Skeleton width='60%' />
+                </Grid>
+              ))
+            : paginatedNews.map((item) => (
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  key={item._id}
+                  sx={{ cursor: "pointer" }}
+                  onClick={() => navigate(`/detail-new?id=${item._id}`)}
+                >
+                  <motion.div
+                    initial='hidden'
+                    whileInView='visible'
+                    viewport={{ once: true, amount: 0.3 }}
+                    variants={fadeSlideUp}
+                  >
+                    <Card sx={{ borderRadius: 2, boxShadow: 2 }}>
+                      <CardMedia
+                        component='img'
+                        height='200'
+                        image={item.imageUrl}
+                        alt='news image'
+                      />
+                      <CardContent>
+                        <Typography
+                          variant='subtitle1'
+                          fontWeight={600}
+                          gutterBottom
+                          noWrap
+                        >
+                          {item.title}
+                        </Typography>
+                        <Typography
+                          variant='body2'
+                          color='text.secondary'
+                          sx={{ minHeight: 48, maxHeight: 100 }}
+                        >
+                          {item.summary.length > 100
+                            ? item.summary.slice(0, 100) + "..."
+                            : item.summary}
+                        </Typography>
+                        <Typography
+                          variant='caption'
+                          color='text.secondary'
+                          sx={{ display: "block", mt: 1 }}
+                        >
+                          {formattedDateHHMMDDMMYYYY(item.publishedAt)}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </Grid>
+              ))}
         </Grid>
 
-        <Box display='flex' justifyContent='center' mt={5}>
-          <Pagination
-            count={Math.ceil(filteredNews.length / itemsPerPage)}
-            page={page}
-            onChange={(e, value) => setPage(value)}
-            shape='rounded'
-            color='primary'
-          />
-        </Box>
+        {/* Pagination */}
+        {!loading && filteredNews.length > itemsPerPage && (
+          <Box display='flex' justifyContent='center' mt={5}>
+            <Pagination
+              count={Math.ceil(filteredNews.length / itemsPerPage)}
+              page={page}
+              onChange={(e, value) => setPage(value)}
+              shape='rounded'
+              color='primary'
+            />
+          </Box>
+        )}
       </Container>
     </Box>
   );

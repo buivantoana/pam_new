@@ -124,13 +124,13 @@ const LayoutAdmin = () => {
   const params = new URLSearchParams(location.search);
   const activeTab = params.get("tab");
   useEffect(() => {
-    if (activeTab && activeTab == "overview") {
+    if (location.pathname && location.pathname == "/admin/post") {
       setActive({ payment: false, user: false, overview: true });
     }
-    if (activeTab && activeTab == "user") {
+    if (location.pathname && location.pathname == "/admin/category") {
       setActive({ payment: false, user: true, overview: false });
     }
-    if (activeTab && activeTab == "payment") {
+    if (location.pathname && location.pathname == "/admin/user") {
       setActive({ payment: true, user: false, overview: false });
     }
   }, [params]);
@@ -171,7 +171,10 @@ const LayoutAdmin = () => {
     setAnchorEl(null);
   };
   const handleLogout = () => {
-    navigate("/");
+    localStorage.removeItem("token")
+    setTimeout(()=>{
+      navigate("/login");
+    },200)
   };
   return (
     <div>
@@ -295,7 +298,7 @@ const LayoutAdmin = () => {
                     borderRadius: active.overview ? "5px" : "none",
                   }}
                   disablePadding>
-                  <Link to={"/admin?tab=overview"}>
+                  <Link to={"/admin/post"}>
                     <CustomListItemButton>
                       <ListItemIcon
                         sx={{ display: "flex", justifyContent: "center" }}>
@@ -320,7 +323,7 @@ const LayoutAdmin = () => {
                     borderRadius: active.user ? "5px" : "none",
                   }}
                   disablePadding>
-                  <Link to={"/admin?tab=user"}>
+                  <Link to={"/admin/category"}>
                     <CustomListItemButton>
                       <ListItemIcon
                         sx={{ display: "flex", justifyContent: "center" }}>
@@ -345,7 +348,7 @@ const LayoutAdmin = () => {
                     borderRadius: active.payment ? "5px" : "none",
                   }}
                   disablePadding>
-                  <Link to={"/admin?tab=payment"}>
+                  <Link to={"/admin/user"}>
                     <CustomListItemButton>
                       <ListItemIcon
                         sx={{ display: "flex", justifyContent: "center" }}>

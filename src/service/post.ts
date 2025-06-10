@@ -31,15 +31,27 @@ function handleError(error: any) {
   return { status: 1, message: "Lỗi kết nối" };
 }
 
-export async function getAllPosts() {
+export async function getAllPosts(query) {
+  if(query&& Object.keys(query).length>0){
+    query = new URLSearchParams(query).toString()
+  }
   try {
-    const res = await api.get("/posts");
+    const res = await api.get(`/posts?${query}`);
     return res.data;
   } catch (e) {
     return handleError(e);
   }
 }
 
+export async function getPostByID(id) {
+  
+  try {
+    const res = await api.get(`/posts/${id}`);
+    return res.data;
+  } catch (e) {
+    return handleError(e);
+  }
+}
 export async function createPost(data: PostData) {
   try {
     const res = await api.post("/posts", data);

@@ -59,6 +59,7 @@ const PostsController = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(false);
+  const [loadingCreate, setLoadingCreate] = useState(false);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [editPost, setEditPost] = useState<Post | null>(null);
@@ -67,7 +68,7 @@ const PostsController = () => {
   const [imageUrl, setImageUrl] = useState("");
   const [file, setFile]: any = useState(null);
   const handleImageChange = (e: any) => {
-    let file = e.target.files[0];
+  let file = e.target.files[0];
 
     if (!file) return;
     setFile(file);
@@ -106,12 +107,14 @@ const PostsController = () => {
     setSnackbar({ open: true, message: msg, severity: sev });
 
   const fetchAll = async () => {
-    setLoading(true);
+     setLoading(true);
+    console.log("toam1")
     const resCats = await getAllCategories();
-    if (resCats.status === 0) setCategories(resCats.data);
+    console.log("toam2",resCats)
+    if (resCats && resCats.status === 0) setCategories(resCats.data);
     const resPosts = await getAllPosts();
-    if (resPosts.status === 0) setPosts(resPosts.data);
-    setLoading(false);
+    if ( resPosts&& resPosts.status === 0) setPosts(resPosts.data);
+     setLoading(false);
   };
 
   useEffect(() => {
@@ -155,7 +158,7 @@ const PostsController = () => {
   const closeModal = () => setModalOpen(false);
 
   const handleSave = async () => {
-    setLoading(true);
+    setLoadingCreate(true);
     if (!form.title.trim())
       return showSnackbar("Title không được để trống", "error");
     if (file) {
@@ -195,7 +198,7 @@ const PostsController = () => {
         closeModal();
       } else showSnackbar(res.message || "Lỗi", "error");
     }
-    setLoading(false);
+    setLoadingCreate(false);
   };
 
   const openDump = (id: string) => {
@@ -225,7 +228,7 @@ const PostsController = () => {
 
   return (
     <>
-      {loading && <Loading />}
+      {loadingCreate && <Loading />}
       <Container maxWidth='xl'>
         <Typography variant='h4' mb={2}>
           Quản lý Posts

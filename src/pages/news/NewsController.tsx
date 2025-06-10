@@ -1,11 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import NewsView from './NewsView'
+import { getAllPosts } from '../../service/post';
 
 type Props = {}
 
 const NewsController = (props: Props) => {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  useEffect(()=>{
+    fetchAll()
+  },[])
+  const fetchAll = async () => {
+    setLoading(true);
+
+   const resPosts = await getAllPosts();
+   if ( resPosts&& resPosts.status === 0) setPosts(resPosts.data);
+    setLoading(false);
+ };
   return (
-    <NewsView/>
+    <NewsView loading={loading} posts={posts} />
   )
 }
 
