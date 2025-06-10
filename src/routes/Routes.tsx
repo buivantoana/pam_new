@@ -36,11 +36,12 @@ const Router = () => {
           <Route path='/detail-new' element={<DetailNewController />} />
           <Route path='/chanel' element={<ChanelController />} />
         </Route>
-        <Route path='/admin' element={<LayoutAdmin />}>
-          <Route path='login' element={<DashBoardController />} />
+        <Route path='/admin' element={<PrivateRouter><LayoutAdmin /></PrivateRouter>}>
+          
           <Route path='category' element={<CategoryController />} />
           <Route path='post' element={<PostsController />} />
         </Route>
+        <Route path='login' element={<DashBoardController />} />
         {/* <Route path='reset-password' element={<ResetPasswordController />} /> */}
 
         <Route path='*' element={<NotFound />} />

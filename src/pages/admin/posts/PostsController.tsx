@@ -226,7 +226,7 @@ const PostsController = () => {
   return (
     <>
       {loading && <Loading />}
-      <Container maxWidth='lg'>
+      <Container maxWidth='xl'>
         <Typography variant='h4' mb={2}>
           Quản lý Posts
         </Typography>
@@ -239,6 +239,7 @@ const PostsController = () => {
             <TableHead>
               <TableRow>
                 <TableCell>Title</TableCell>
+                <TableCell>Image</TableCell>
                 <TableCell>Type</TableCell>
                 <TableCell>Categories</TableCell>
                 <TableCell align='right'>Thao tác</TableCell>
@@ -255,6 +256,7 @@ const PostsController = () => {
               {posts.map((p) => (
                 <TableRow key={p._id}>
                   <TableCell>{p.title}</TableCell>
+                  <TableCell><img src={p.imageUrl} width={50} height={50} style={{borderRadius:"5px"}} /></TableCell>
                   <TableCell>{p.type}</TableCell>
                   <TableCell>
                     {p.categories
@@ -278,7 +280,7 @@ const PostsController = () => {
           </Table>
         </TableContainer>
 
-        <Dialog maxWidth='lg' open={modalOpen} onClose={closeModal}>
+        <Dialog maxWidth='xl' open={modalOpen} onClose={closeModal}>
           <DialogTitle>{editPost ? "Sửa Post" : "Thêm Post"}</DialogTitle>
           <DialogContent>
             <Grid container py={1} spacing={2}>

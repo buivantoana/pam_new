@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import Loading from "../../../components/Loading";
 import background_gif from "../../../images/source.gif";
 import { Login } from "../../../service/admin";
-import DashBoardView from "./DashBoardView";
+
 type Props = {};
 
 const DashBoardController = (props: Props) => {
@@ -44,7 +44,11 @@ const DashBoardController = (props: Props) => {
       console.log(result);
       if (result && result.status == 0) {
         toast.success("Login success");
+        localStorage.setItem("token",JSON.stringify(result.data))
         setLoading(false);
+        setTimeout(()=>{
+          navigate("/admin/post")
+        },500)
       } else {
         toast.warning("Error login");
         setLoading(false);
@@ -55,7 +59,7 @@ const DashBoardController = (props: Props) => {
   return (
     <Box>
       {loading && <Loading />}
-      {/* <Box
+      <Box
         sx={{
           position: "fixed",
           top: 0,
@@ -200,7 +204,7 @@ const DashBoardController = (props: Props) => {
             </Button>
           </Box>
         </Box>
-      </Box> */}
+      </Box>
     </Box>
   );
 };

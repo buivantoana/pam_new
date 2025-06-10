@@ -176,7 +176,7 @@ const CategoryController = () => {
   };
 
   return (
-    <Container maxWidth='lg'>
+    <Container maxWidth="xl">
       <Typography variant='h4' mb={2} textAlign='center'>
         Quản lý Categories
       </Typography>
