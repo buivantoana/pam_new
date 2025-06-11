@@ -181,6 +181,7 @@ const LayoutAdmin = () => {
       <Box
         sx={{
           display: "flex",
+          background:"white",
           ".css-123k39-MuiPaper-root-MuiAppBar-root": {
             zIndex: 8,
           },
@@ -363,7 +364,7 @@ const LayoutAdmin = () => {
             </Box>
           </Drawer>
         </Box>
-        <Main sx={{ background: "#f5f8fb", minHeight: "100vh" }} open={open}>
+        <Main sx={{  minHeight: "100vh" }} open={open}>
           <DrawerHeader />
           <Box>
             <Outlet />

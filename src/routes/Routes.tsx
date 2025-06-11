@@ -17,6 +17,10 @@ import ChanelController from "../pages/chanel/ChanelController";
 import ScrollToTop from "../components/ScrollToTop";
 import CategoryController from "../pages/admin/category/CategoryController";
 import PostsController from "../pages/admin/posts/PostsController";
+import ImageFetcher from "../pages/admin/image/HomeController";
+import HomeController from "../pages/admin/image/HomeController";
+import RecruitmentImageController from "../pages/admin/image/RecruitmentImageController";
+import CooperateImageController from "../pages/admin/image/CooperateImageController";
 
 const Router = () => {
   const context: any = useCoursesContext();
@@ -40,6 +44,9 @@ const Router = () => {
           
           <Route path='category' element={<CategoryController />} />
           <Route path='post' element={<PostsController />} />
+          <Route path='home-image' element={<HomeController />} />
+          <Route path='recruitment-image' element={<RecruitmentImageController />} />
+          <Route path='cooperate-image' element={<CooperateImageController />} />
         </Route>
         <Route path='login' element={<DashBoardController />} />
         {/* <Route path='reset-password' element={<ResetPasswordController />} /> */}

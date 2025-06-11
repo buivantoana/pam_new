@@ -14,9 +14,9 @@ const NewsController = (props: Props) => {
     setLoading(true);
 
    const resPosts = await getAllPosts();
-   if ( resPosts&& resPosts.status === 0) setPosts(resPosts.data);
+  if ( resPosts&& resPosts.status === 0) setPosts(resPosts.data);
     setLoading(false);
- };
+  };
   return (
     <NewsView loading={loading} posts={posts} />
   )
