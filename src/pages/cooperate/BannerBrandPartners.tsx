@@ -9,7 +9,7 @@ import {
 import { motion } from "framer-motion";
 import banner from "../../images/1fa47c58664fc06c9fc374d0ccb62914013f9d63.png";
 
-const BannerBrandPartners = () => {
+const BannerBrandPartners = ({ image }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -23,7 +23,9 @@ const BannerBrandPartners = () => {
         position: "relative",
         width: "100%",
         height: { xs: "100%", md: "450px" },
-        backgroundImage: `url('${banner}')`,
+        backgroundImage: `url('${
+          image?.cooperate?.topImage ? image?.cooperate?.topImage : banner
+        }')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         display: "flex",

@@ -8,14 +8,14 @@ import IPCardSection from "./IPCardSection";
 
 type Props = {};
 
-const CooperateView = (props: Props) => {
+const CooperateView = ({ image }: any) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <Box pt={isMobile ? 10 : "90px"} sx={{ background: "white" }}>
-      <BannerBrandPartners />
+      <BannerBrandPartners image={image} />
       <PartnersSection />
-      <AudienceSection />
+      <AudienceSection image={image} />
       <TopContentSection />
       <IPCardSection />
     </Box>

@@ -22,6 +22,13 @@ import {
 } from "@mui/material";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import React, { useEffect, useState } from "react";
+import { Collapse } from "@mui/material";
+import {
+  RiImageEditFill,
+  RiHome6Line,
+  RiTeamLine,
+  RiBuildingLine,
+} from "react-icons/ri";
 import {
   RiArticleLine,
   RiBankCardFill,
@@ -48,7 +55,7 @@ import "../../App.css";
 import profile from "../../images/facebook-cap-nhat-avatar-doi-voi-tai-khoan-khong-su-dung-anh-dai-dien-e4abd14d.jpg";
 import logo from "../../images/dabeb7fcebd00c596297e51a1cf6134d57e64622.png";
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   open?: boolean;
@@ -114,10 +121,11 @@ const LayoutAdmin = () => {
   const theme: any = useTheme();
   const [open, setOpen] = React.useState(true);
   const [active, setActive] = React.useState({
-    overview: true,
-    payment: false,
-    user: false,
+    post: true,
+    image: false,
+    category: false,
   });
+  const [openImageMenu, setOpenImageMenu] = useState(false);
   const [selectedItem, setSelectedItem] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
@@ -125,13 +133,17 @@ const LayoutAdmin = () => {
   const activeTab = params.get("tab");
   useEffect(() => {
     if (location.pathname && location.pathname == "/admin/post") {
-      setActive({ payment: false, user: false, overview: true });
+      setActive({ image: false, category: false, post: true });
     }
     if (location.pathname && location.pathname == "/admin/category") {
-      setActive({ payment: false, user: true, overview: false });
+      setActive({ image: false, category: true, post: false });
     }
-    if (location.pathname && location.pathname == "/admin/user") {
-      setActive({ payment: true, user: false, overview: false });
+    if (
+      (location.pathname && location.pathname == "/admin/home-image") ||
+      (location.pathname && location.pathname == "/admin/recruitment-image") ||
+      (location.pathname && location.pathname == "/admin/cooperate-image")
+    ) {
+      setActive({ image: true, category: false, post: false });
     }
   }, [params]);
   const handleDrawerOpen = () => {
@@ -140,19 +152,6 @@ const LayoutAdmin = () => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  const handleListItemClick = (text: string) => {
-    setSelectedItem(text);
-  };
-
-  const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-    "& .MuiDialogContent-root": {
-      padding: theme.spacing(2),
-    },
-    "& .MuiDialogActions-root": {
-      padding: theme.spacing(1),
-    },
-  }));
 
   const [opened, setOpenEnd] = React.useState(false);
 
@@ -171,17 +170,17 @@ const LayoutAdmin = () => {
     setAnchorEl(null);
   };
   const handleLogout = () => {
-    localStorage.removeItem("token")
-    setTimeout(()=>{
+    localStorage.removeItem("token");
+    setTimeout(() => {
       navigate("/login");
-    },200)
+    }, 200);
   };
   return (
     <div>
       <Box
         sx={{
           display: "flex",
-          background:"white",
+          background: "white",
           ".css-123k39-MuiPaper-root-MuiAppBar-root": {
             zIndex: 8,
           },
@@ -285,7 +284,7 @@ const LayoutAdmin = () => {
               </IconButton>
             </DrawerHeader>
 
-            <Box className='see-more-admin' sx={{ color: "white" }}>
+            <Box className='see-more-admin' mt={4} sx={{ color: "white" }}>
               <List sx={{ px: "10px" }}>
                 <ListItem
                   sx={{
@@ -294,9 +293,9 @@ const LayoutAdmin = () => {
                       width: "100%",
                       textDecoration: "none",
                     },
-                    background: active.overview ? "#2e3650" : undefined,
-                    border: active.overview ? "1px solid #4c5680" : "none",
-                    borderRadius: active.overview ? "5px" : "none",
+                    background: active.post ? "#2e3650" : undefined,
+                    border: active.post ? "1px solid #4c5680" : "none",
+                    borderRadius: active.post ? "5px" : "none",
                   }}
                   disablePadding>
                   <Link to={"/admin/post"}>
@@ -319,9 +318,9 @@ const LayoutAdmin = () => {
                       width: "100%",
                       textDecoration: "none",
                     },
-                    background: active.user ? "#2e3650" : undefined,
-                    border: active.user ? "1px solid #4c5680" : "none",
-                    borderRadius: active.user ? "5px" : "none",
+                    background: active.category ? "#2e3650" : undefined,
+                    border: active.category ? "1px solid #4c5680" : "none",
+                    borderRadius: active.category ? "5px" : "none",
                   }}
                   disablePadding>
                   <Link to={"/admin/category"}>
@@ -336,7 +335,7 @@ const LayoutAdmin = () => {
                 </ListItem>
               </List>
               <Divider />
-              <List sx={{ px: "10px" }}>
+              {/* <List sx={{ px: "10px" }}>
                 <ListItem
                   sx={{
                     a: {
@@ -344,27 +343,92 @@ const LayoutAdmin = () => {
                       width: "100%",
                       textDecoration: "none",
                     },
-                    background: active.payment ? "#2e3650" : undefined,
-                    border: active.payment ? "1px solid #4c5680" : "none",
-                    borderRadius: active.payment ? "5px" : "none",
+                    background: active.image ? "#2e3650" : undefined,
+                    border: active.image ? "1px solid #4c5680" : "none",
+                    borderRadius: active.image ? "5px" : "none",
                   }}
                   disablePadding>
                   <Link to={"/admin/user"}>
                     <CustomListItemButton>
                       <ListItemIcon
                         sx={{ display: "flex", justifyContent: "center" }}>
-                        <RiSecurePaymentFill color={"white"} />
+                        <RiSecureimageFill color={"white"} />
                       </ListItemIcon>
                       <ListItemText primary={"Người dùng"} />
                     </CustomListItemButton>
                   </Link>
                 </ListItem>
               </List>
+              <Divider /> */}
+              <List sx={{ px: "10px" }}>
+                <ListItem
+                  onClick={() => setOpenImageMenu(!openImageMenu)}
+                  sx={{
+                    color: "white",
+                    cursor: "pointer",
+                    background: active.image ? "#2e3650" : undefined,
+                    border: active.image ? "1px solid #4c5680" : "none",
+                    borderRadius: active.image ? "5px" : "none",
+                  }}
+                  disablePadding>
+                  <CustomListItemButton>
+                    <ListItemIcon
+                      sx={{ display: "flex", justifyContent: "center" }}>
+                      <RiImageEditFill color={"white"} />
+                    </ListItemIcon>
+                    <ListItemText primary={"Quản lý ảnh"} />
+                  </CustomListItemButton>
+                </ListItem>
+
+                <Collapse in={openImageMenu} timeout='auto' unmountOnExit>
+                  <List component='div' disablePadding>
+                    <ListItem disablePadding>
+                      <Link
+                        to='/admin/home-image'
+                        style={{ width: "100%", textDecoration: "none" }}>
+                        <CustomListItemButton sx={{ pl: 4 }}>
+                          <ListItemIcon>
+                            <RiHome6Line color='white' />
+                          </ListItemIcon>
+                          <ListItemText primary='Ảnh trang chủ' />
+                        </CustomListItemButton>
+                      </Link>
+                    </ListItem>
+
+                    <ListItem disablePadding>
+                      <Link
+                        to='/admin/recruitment-image'
+                        style={{ width: "100%", textDecoration: "none" }}>
+                        <CustomListItemButton sx={{ pl: 4 }}>
+                          <ListItemIcon>
+                            <RiTeamLine color='white' />
+                          </ListItemIcon>
+                          <ListItemText primary='Ảnh tuyển dụng' />
+                        </CustomListItemButton>
+                      </Link>
+                    </ListItem>
+
+                    <ListItem disablePadding>
+                      <Link
+                        to='/admin/cooperate-image'
+                        style={{ width: "100%", textDecoration: "none" }}>
+                        <CustomListItemButton sx={{ pl: 4 }}>
+                          <ListItemIcon>
+                            <RiBuildingLine color='white' />
+                          </ListItemIcon>
+                          <ListItemText primary='Ảnh hợp tác' />
+                        </CustomListItemButton>
+                      </Link>
+                    </ListItem>
+                  </List>
+                </Collapse>
+              </List>
+
               <Divider />
             </Box>
           </Drawer>
         </Box>
-        <Main sx={{  minHeight: "100vh" }} open={open}>
+        <Main sx={{ minHeight: "100vh" }} open={open}>
           <DrawerHeader />
           <Box>
             <Outlet />

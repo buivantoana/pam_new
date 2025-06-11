@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow } from "swiper/modules";
@@ -21,10 +21,21 @@ const fadeInUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
 };
 
-const ChannelSlider = () => {
+const ChannelSlider = ({ image }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
+  let [imageSlider, setImageSlider] = useState([]);
+  useEffect(() => {
+    if (
+      image &&
+      image.channelSliderImages &&
+      image.channelSliderImages.length > 0
+    ) {
+      setImageSlider(image.channelSliderImages);
+    } else {
+      setImageSlider(images);
+    }
+  }, [image]);
   return (
     <Box py={6} px={2} sx={{ backgroundColor: "#fff" }}>
       {/* Tiêu đề */}
@@ -73,7 +84,7 @@ const ChannelSlider = () => {
               slideShadows: false,
             }}
             modules={[EffectCoverflow]}>
-            {images.map((src, index) => (
+            {imageSlider.map((src, index) => (
               <SwiperSlide key={index} style={{ height: "100%" }}>
                 <motion.img
                   src={src}

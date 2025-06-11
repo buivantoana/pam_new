@@ -34,7 +34,7 @@ const fadeIn = (direction = "up", delay = 0) => {
   return variants;
 };
 
-const Banner = () => {
+const Banner = ({ image }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -173,7 +173,7 @@ const Banner = () => {
         viewport={{ once: true }}
         variants={fadeIn("up", 0.7)}>
         <Container maxWidth='lg'>
-          <ChannelSlider />
+          <ChannelSlider image={image} />
         </Container>
       </motion.div>
 

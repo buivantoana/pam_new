@@ -33,7 +33,7 @@ const floatIn = (delay = 0) => ({
   },
 });
 
-const AboutSection = () => {
+const AboutSection = ({ image }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -130,7 +130,11 @@ const AboutSection = () => {
                 viewport={{ once: true }}>
                 <Box
                   component='img'
-                  src={AboutImage1}
+                  src={
+                    image && image?.homeBanner?.rightImage1
+                      ? image.homeBanner?.rightImage1
+                      : AboutImage1
+                  }
                   alt='PAM Image'
                   sx={{ maxWidth: "100%", borderRadius: 3, boxShadow: 3 }}
                 />
@@ -151,7 +155,11 @@ const AboutSection = () => {
                 viewport={{ once: true }}>
                 <Box
                   component='img'
-                  src={AboutImage2}
+                  src={
+                    image && image?.homeBanner?.leftImage2
+                      ? image.homeBanner?.leftImage2
+                      : AboutImage2
+                  }
                   alt='Pam Party'
                   sx={{ maxWidth: "100%", borderRadius: 3, boxShadow: 3 }}
                 />

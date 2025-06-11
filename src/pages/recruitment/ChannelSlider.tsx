@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Autoplay } from "swiper/modules";
@@ -14,12 +14,23 @@ import img5 from "../../images/f9ba8517ad4dadbc18b9e3832b3d8ac162433c9e.png";
 
 const images = [img1, img2, img3, img4, img5];
 
-const ChannelSlider = () => {
+const ChannelSlider = ({ image }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
+  let [imageSlider, setImageSlider] = useState([]);
+  useEffect(() => {
+    if (
+      image &&
+      image.channelSliderImages &&
+      image.channelSliderImages.length > 0
+    ) {
+      setImageSlider(image.channelSliderImages);
+    } else {
+      setImageSlider(images);
+    }
+  }, [image]);
   return (
-    <Box py={6} >
+    <Box py={6}>
       <Box>
         <Swiper
           effect={"coverflow"}
@@ -42,7 +53,7 @@ const ChannelSlider = () => {
             slideShadows: false,
           }}
           modules={[EffectCoverflow]}>
-          {images.map((src, index) => (
+          {imageSlider.map((src, index) => (
             <SwiperSlide key={index} style={{ height: "100%" }}>
               <Box sx={{ height: "100%" }}>
                 <Box

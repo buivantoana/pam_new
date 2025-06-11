@@ -68,7 +68,7 @@ const PostsController = () => {
   const [imageUrl, setImageUrl] = useState("");
   const [file, setFile]: any = useState(null);
   const handleImageChange = (e: any) => {
-  let file = e.target.files[0];
+    let file = e.target.files[0];
 
     if (!file) return;
     setFile(file);
@@ -107,14 +107,14 @@ const PostsController = () => {
     setSnackbar({ open: true, message: msg, severity: sev });
 
   const fetchAll = async () => {
-     setLoading(true);
-    console.log("toam1")
+    setLoading(true);
+    console.log("toam1");
     const resCats = await getAllCategories();
-    console.log("toam2",resCats)
+    console.log("toam2", resCats);
     if (resCats && resCats.status === 0) setCategories(resCats.data);
     const resPosts = await getAllPosts();
-    if ( resPosts&& resPosts.status === 0) setPosts(resPosts.data);
-     setLoading(false);
+    if (resPosts && resPosts.status === 0) setPosts(resPosts.data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -259,7 +259,14 @@ const PostsController = () => {
               {posts.map((p) => (
                 <TableRow key={p._id}>
                   <TableCell>{p.title}</TableCell>
-                  <TableCell><img src={p.imageUrl} width={50} height={50} style={{borderRadius:"5px"}} /></TableCell>
+                  <TableCell>
+                    <img
+                      src={p.imageUrl}
+                      width={50}
+                      height={50}
+                      style={{ borderRadius: "5px" }}
+                    />
+                  </TableCell>
                   <TableCell>{p.type}</TableCell>
                   <TableCell>
                     {p.categories

@@ -18,12 +18,6 @@ import image3 from "../../images/3.png";
 import khangia1 from "../../images/khangia1.png";
 import khangia2 from "../../images/khangia2.png";
 
-const audienceData = [
-  { title: "Trẻ em", image: image1 },
-  { title: "Thanh thiếu niên và các thành viên trong gia đình", image: image2 },
-  { title: "Gen Z", image: image3 },
-];
-
 const floatAnimation = {
   animate: {
     y: [0, -10, 0],
@@ -35,10 +29,23 @@ const floatAnimation = {
   },
 };
 
-const AudienceSection = () => {
+const AudienceSection = ({ image }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
+  const audienceData = [
+    {
+      title: "Trẻ em",
+      image: image?.cooperate?.image1 ? image?.cooperate?.image1 : image1,
+    },
+    {
+      title: "Thanh thiếu niên và các thành viên trong gia đình",
+      image: image?.cooperate?.image2 ? image?.cooperate?.image2 : image2,
+    },
+    {
+      title: "Gen Z",
+      image: image?.cooperate?.image3 ? image?.cooperate?.image3 : image3,
+    },
+  ];
   return (
     <Box
       component={motion.div}

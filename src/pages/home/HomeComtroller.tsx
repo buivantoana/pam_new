@@ -1,12 +1,26 @@
-import React from 'react'
-import HomeView from './HomeView'
+import React, { useEffect, useState } from "react";
+import HomeView from "./HomeView";
+import { getImageByName } from "../../service/manage_image";
 
-type Props = {}
+type Props = {};
 
 const HomeComtroller = (props: Props) => {
-  return (
-    <HomeView/>
-  )
-}
+  let [image, setImage] = useState(null);
+  useEffect(() => {
+    getImage();
+  }, []);
 
-export default HomeComtroller
+  let getImage = async () => {
+    try {
+      let result = await getImageByName("home");
+      if (result && result.status == 0) {
+        setImage(result.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return <HomeView image={image} />;
+};
+
+export default HomeComtroller;

@@ -8,11 +8,11 @@ import JobApplicationForm from "./JobApplicationForm";
 
 type Props = {};
 
-const RecruitmentView = (props: Props) => {
+const RecruitmentView = ({ image }: any) => {
   return (
     <Box sx={{ background: "white" }}>
-      <Banner />
-      <AboutSection />
+      <Banner image={image} />
+      <AboutSection image={image} />
       <IPCardSection />
       <JobApplicationForm />
     </Box>

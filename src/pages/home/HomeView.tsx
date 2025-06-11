@@ -5,15 +5,13 @@ import AboutSection from "./AboutSection";
 import ChannelSlider from "./ChannelSlider";
 import PartnersSection from "./PartnersSection";
 
-type Props = {};
-
-const HomeView = (props: Props) => {
+const HomeView = ({ image }: any) => {
   return (
     <Box sx={{ background: "white" }}>
       <Banner />
-      <AboutSection />
+      <AboutSection image={image} />
       <Container maxWidth='lg'>
-        <ChannelSlider />
+        <ChannelSlider image={image} />
       </Container>
       <PartnersSection />
     </Box>

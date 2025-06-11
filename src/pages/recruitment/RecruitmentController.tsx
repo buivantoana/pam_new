@@ -1,12 +1,26 @@
-import React from 'react'
-import RecruitmentView from './RecruitmentView'
+import React, { useEffect, useState } from "react";
+import RecruitmentView from "./RecruitmentView";
+import { getImageByName } from "../../service/manage_image";
 
-type Props = {}
+type Props = {};
 
 const RecruitmentController = (props: Props) => {
-  return (
-    <RecruitmentView/>
-  )
-}
+  let [image, setImage] = useState(null);
+  useEffect(() => {
+    getImage();
+  }, []);
 
-export default RecruitmentController
+  let getImage = async () => {
+    try {
+      let result = await getImageByName("recruitment");
+      if (result && result.status == 0) {
+        setImage(result.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return <RecruitmentView image={image} />;
+};
+
+export default RecruitmentController;
