@@ -1,25 +1,30 @@
-import React, { useEffect, useState } from 'react'
-import NewsView from './NewsView'
-import { getAllPosts } from '../../service/post';
+import React, { useEffect, useState } from "react";
+import NewsView from "./NewsView";
+import { getAllPosts } from "../../service/post";
+import { useLocation } from "react-router-dom";
 
-type Props = {}
-
-const NewsController = (props: Props) => {
+const NewsController = (props) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
-  useEffect(()=>{
-    fetchAll()
-  },[])
-  const fetchAll = async () => {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const type = params.get("type");
+  console.log("type", type);
+  useEffect(() => {
+    let query: any = {};
+    if (type) {
+      query.type = type;
+    }
+    fetchAll(query);
+  }, [type]);
+  const fetchAll = async (query) => {
     setLoading(true);
 
-   const resPosts = await getAllPosts();
-  if ( resPosts&& resPosts.status === 0) setPosts(resPosts.data);
+    const resPosts = await getAllPosts(query);
+    if (resPosts && resPosts.status === 0) setPosts(resPosts.data);
     setLoading(false);
   };
-  return (
-    <NewsView loading={loading} posts={posts} />
-  )
-}
+  return <NewsView loading={loading} posts={posts} />;
+};
 
-export default NewsController
+export default NewsController;

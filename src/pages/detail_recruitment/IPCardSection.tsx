@@ -17,6 +17,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { motion } from "framer-motion";
 
 import img1 from "../../images/f9ba8517ad4dadbc18b9e3832b3d8ac162433c9e.png";
+import { useNavigate } from "react-router-dom";
 
 const data = [
   {
@@ -68,7 +69,7 @@ const Stat = ({ text, color, detail }) => (
 export default function IPCardSection() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
+  const navigate = useNavigate();
   return (
     <Container maxWidth='lg' sx={{ py: 4 }}>
       <motion.div
@@ -161,6 +162,7 @@ export default function IPCardSection() {
         <Box my={3} textAlign={"center"}>
           <Button
             variant='outlined'
+            onClick={() => navigate("/news?type=job")}
             sx={{
               borderRadius: 20,
               color: "#f26522",

@@ -31,7 +31,6 @@ const fadeSlideUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
-
 const NewsView = ({ posts, loading }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -138,7 +137,11 @@ const NewsView = ({ posts, loading }) => {
           {loading
             ? Array.from({ length: itemsPerPage }).map((_, index) => (
                 <Grid item xs={12} sm={6} md={4} key={index}>
-                  <Skeleton variant='rectangular' sx={{borderRadius:3}} height={250} />
+                  <Skeleton
+                    variant='rectangular'
+                    sx={{ borderRadius: 3 }}
+                    height={250}
+                  />
                   <Skeleton height={30} />
                   <Skeleton width='60%' />
                 </Grid>
@@ -151,14 +154,18 @@ const NewsView = ({ posts, loading }) => {
                   md={4}
                   key={item._id}
                   sx={{ cursor: "pointer" }}
-                  onClick={() => navigate(`/detail-new?id=${item._id}`)}
-                >
+                  onClick={() =>
+                    navigate(
+                      item.type == "job"
+                        ? `/detail-recruitment?id=${item._id}`
+                        : `/detail-new?id=${item._id}`
+                    )
+                  }>
                   <motion.div
                     initial='hidden'
                     whileInView='visible'
                     viewport={{ once: true, amount: 0.3 }}
-                    variants={fadeSlideUp}
-                  >
+                    variants={fadeSlideUp}>
                     <Card sx={{ borderRadius: 2, boxShadow: 2 }}>
                       <CardMedia
                         component='img'
@@ -171,15 +178,13 @@ const NewsView = ({ posts, loading }) => {
                           variant='subtitle1'
                           fontWeight={600}
                           gutterBottom
-                          noWrap
-                        >
+                          noWrap>
                           {item.title}
                         </Typography>
                         <Typography
                           variant='body2'
                           color='text.secondary'
-                          sx={{ minHeight: 48, maxHeight: 100 }}
-                        >
+                          sx={{ minHeight: 48, maxHeight: 100 }}>
                           {item.summary.length > 100
                             ? item.summary.slice(0, 100) + "..."
                             : item.summary}
@@ -187,8 +192,7 @@ const NewsView = ({ posts, loading }) => {
                         <Typography
                           variant='caption'
                           color='text.secondary'
-                          sx={{ display: "block", mt: 1 }}
-                        >
+                          sx={{ display: "block", mt: 1 }}>
                           {formattedDateHHMMDDMMYYYY(item.publishedAt)}
                         </Typography>
                       </CardContent>
