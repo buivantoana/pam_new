@@ -21,6 +21,7 @@ import ImageFetcher from "../pages/admin/image/HomeController";
 import HomeController from "../pages/admin/image/HomeController";
 import RecruitmentImageController from "../pages/admin/image/RecruitmentImageController";
 import CooperateImageController from "../pages/admin/image/CooperateImageController";
+import ContactController from "../pages/contact/ContactController";
 
 const Router = () => {
   const context: any = useCoursesContext();
@@ -31,6 +32,7 @@ const Router = () => {
         <Route path='/' element={<LayoutWebsite />}>
           <Route path='' element={<HomeComtroller />} />
           <Route path='/cooperate' element={<CooperateController />} />
+          <Route path='/contact' element={<ContactController />} />
           <Route path='/recruitment' element={<RecruitmentController />} />
           <Route
             path='/detail-recruitment'
@@ -40,13 +42,24 @@ const Router = () => {
           <Route path='/detail-new' element={<DetailNewController />} />
           <Route path='/chanel' element={<ChanelController />} />
         </Route>
-        <Route path='/admin' element={<PrivateRouter><LayoutAdmin /></PrivateRouter>}>
-          
+        <Route
+          path='/admin'
+          element={
+            <PrivateRouter>
+              <LayoutAdmin />
+            </PrivateRouter>
+          }>
           <Route path='category' element={<CategoryController />} />
           <Route path='post' element={<PostsController />} />
           <Route path='home-image' element={<HomeController />} />
-          <Route path='recruitment-image' element={<RecruitmentImageController />} />
-          <Route path='cooperate-image' element={<CooperateImageController />} />
+          <Route
+            path='recruitment-image'
+            element={<RecruitmentImageController />}
+          />
+          <Route
+            path='cooperate-image'
+            element={<CooperateImageController />}
+          />
         </Route>
         <Route path='login' element={<DashBoardController />} />
         {/* <Route path='reset-password' element={<ResetPasswordController />} /> */}

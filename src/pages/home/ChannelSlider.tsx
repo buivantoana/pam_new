@@ -31,7 +31,14 @@ const ChannelSlider = ({ image }) => {
       image.channelSliderImages &&
       image.channelSliderImages.length > 0
     ) {
-      setImageSlider(image.channelSliderImages);
+      setImageSlider(
+        image.channelSliderImages.map((item) => {
+          if (!item) {
+            return img1;
+          }
+          return item;
+        })
+      );
     } else {
       setImageSlider(images);
     }
@@ -52,7 +59,7 @@ const ChannelSlider = ({ image }) => {
           Hệ thống kênh của{" "}
           <Box
             component='span'
-            sx={{ fontFamily: `"Courgette", cursive` }}
+            sx={{}}
             fontWeight={600}
             fontStyle='italic'
             color='#f26522'>
@@ -128,6 +135,7 @@ const ChannelSlider = ({ image }) => {
               width: { xs: 100, sm: 200 },
               height: { xs: 100, sm: 200 },
               borderRadius: "50%",
+              objectFit: "cover",
             }}
           />
 

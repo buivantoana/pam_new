@@ -22,6 +22,8 @@ import vector2 from "../../images/Vector-left3.png";
 import icon_right from "../../images/icon-right.png";
 import icon_right1 from "../../images/icon-right2.png";
 import vector3 from "../../images/Vectorright.png";
+import bg from "../../images/Mask group.png";
+import { useNavigate } from "react-router-dom";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 30 },
@@ -44,7 +46,7 @@ const floatImage = {
 const Banner = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
+  const navigate = useNavigate();
   return (
     <Box
       px={2}
@@ -54,8 +56,10 @@ const Banner = () => {
       pb={isMobile ? 3 : 5}
       sx={{
         overflow: "hidden",
-        background: "linear-gradient(to bottom, #fff5f0, white)",
+        background: `url("${bg}")`,
         position: "relative",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "100% 100%",
       }}>
       {/* Background Images with Animation */}
       {[
@@ -118,7 +122,7 @@ const Banner = () => {
           sx={{
             color: "#f26522",
             fontSize: isMobile ? "26px" : "65px",
-            fontFamily: `"Courgette", cursive`,
+            // fontFamily: `"Courgette", cursive`,
           }}>
           PAM MEDIA
         </Typography>
@@ -162,6 +166,7 @@ const Banner = () => {
           <Button
             variant='contained'
             size='large'
+            onClick={() => navigate("/contact")}
             sx={{
               backgroundColor: "#f26522",
               borderRadius: 999,

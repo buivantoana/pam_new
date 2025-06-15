@@ -111,8 +111,20 @@ const AboutSection = ({ image }) => {
                 whileInView='visible'
                 viewport={{ once: true }}
                 variants={fadeIn("up", 0.2)}>
-                <Box mb={2} width={"60%"}>
-                  <img src={AboutImage4} width='100%' />
+                <Box mb={2}>
+                  {/* <img src={AboutImage4} width='100%' /> */}
+                  <Typography
+                    fontWeight={"bold"}
+                    fontSize={isMobile ? "35px" : "64px"}>
+                    Nghề nghiệp tại <br />{" "}
+                    <Typography
+                      fontSize={isMobile ? "35px" : "64px"}
+                      fontWeight={"bold"}
+                      fontStyle={"italic"}
+                      color='rgba(255, 97, 25, 1)'>
+                      Pam-Media
+                    </Typography>
+                  </Typography>
                 </Box>
                 <Typography color='textSecondary' mb={3}>
                   Lorem ipsum is simply dummy text of the printing and
@@ -192,8 +204,22 @@ const AboutSection = ({ image }) => {
                 whileInView='visible'
                 viewport={{ once: true }}
                 variants={fadeIn("up", 0.5)}>
-                <Box mb={2} width={"60%"}>
-                  <img src={AboutImage3} width='100%' />
+                <Box mb={2}>
+                  {/* <img src={AboutImage3} width='100%' /> */}
+                  <Typography
+                    fontWeight={"bold"}
+                    fontSize={isMobile ? "35px" : "64px"}>
+                    Ưu điểm làm việc
+                    <br /> tại{" "}
+                    <Typography
+                      variant='span'
+                      fontSize={isMobile ? "35px" : "64px"}
+                      fontWeight={"bold"}
+                      fontStyle={"italic"}
+                      color='rgba(162, 191, 0, 1)'>
+                      Pam-Media
+                    </Typography>
+                  </Typography>
                 </Box>
                 <Box display={"flex"} flexDirection={"column"} mb={3} gap={2}>
                   {[

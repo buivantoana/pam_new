@@ -105,7 +105,6 @@ const PartnersSection = () => {
         Đối tác kênh của{" "}
         <Box
           component='span'
-          sx={{ fontFamily: `"Courgette", cursive` }}
           fontWeight={600}
           fontStyle='italic'
           color='#A2BF00'>

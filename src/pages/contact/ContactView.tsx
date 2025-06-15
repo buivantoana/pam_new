@@ -1,6 +1,107 @@
-import React, { useState } from "react";
+import { Box } from "@mui/material";
+import React from "react";
+import vector1 from "../../images/Vector (1).png";
+import vector2 from "../../images/Vector (2).png";
+import vector4 from "../../images/Vector.png";
+import vector5 from "../../images/Element 8.png";
+import { motion } from "framer-motion";
+
+const fadeSlideUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+const ContactView = (props: any) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  return (
+    <Box
+      sx={{
+        background: "linear-gradient(to bottom, #fff5f0, white)",
+        position: "relative",
+        paddingTop: isMobile ? "150px" : "180px",
+      }}>
+      <motion.img
+        src={vector2}
+        alt='Avatar 1'
+        initial='hidden'
+        whileInView='visible'
+        viewport={{ once: true, amount: 0.3 }}
+        variants={fadeSlideUp}
+        style={{
+          display: isMobile ? "none" : "block",
+          position: "absolute",
+          top: isMobile ? 80 : "50%",
+          left: 0,
+          width: isMobile ? 100 : undefined,
+        }}
+      />
+      <motion.img
+        src={vector1}
+        alt='Avatar 1'
+        initial='hidden'
+        whileInView='visible'
+        viewport={{ once: true, amount: 0.3 }}
+        variants={fadeSlideUp}
+        style={{
+          display: isMobile ? "none" : "block",
+          position: "absolute",
+          top: isMobile ? 80 : "5%",
+          left: 0,
+          width: isMobile ? 100 : undefined,
+        }}
+      />
+      <motion.img
+        src={vector4}
+        alt='Avatar 1'
+        initial='hidden'
+        whileInView='visible'
+        viewport={{ once: true, amount: 0.3 }}
+        variants={fadeSlideUp}
+        style={{
+          display: isMobile ? "none" : "block",
+          position: "absolute",
+          top: isMobile ? 80 : "10%",
+          right: 0,
+          width: isMobile ? 100 : undefined,
+        }}
+      />
+      <motion.img
+        src={vector5}
+        alt='Avatar 1'
+        initial='hidden'
+        whileInView='visible'
+        viewport={{ once: true, amount: 0.3 }}
+        variants={fadeSlideUp}
+        style={{
+          display: isMobile ? "none" : "block",
+          position: "absolute",
+          top: isMobile ? 80 : "70%",
+          right: 0,
+          width: isMobile ? 100 : undefined,
+        }}
+      />
+      <motion.div
+        initial='hidden'
+        whileInView='visible'
+        viewport={{ once: true, amount: 0.3 }}
+        variants={fadeSlideUp}>
+        <Typography
+          variant={isMobile ? "h2" : "h1"}
+          textAlign={"center"}
+          color='#FF6119'
+          fontWeight={"700"}
+          mb={3}>
+          Liên hệ qua Email
+        </Typography>
+      </motion.div>
+      <JobApplicationForm />
+    </Box>
+  );
+};
+
+export default ContactView;
+import { useState } from "react";
 import {
-  Box,
   Grid,
   TextField,
   Button,
@@ -11,7 +112,6 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
-import { motion } from "framer-motion";
 
 const positions = [
   "Chuyên viên nhân sự",
@@ -34,8 +134,7 @@ const fadeInUp = (delay = 0) => ({
     },
   },
 });
-
-export default function JobApplicationForm() {
+function JobApplicationForm() {
   const [form, setForm] = useState({
     name: "",
     email: "",

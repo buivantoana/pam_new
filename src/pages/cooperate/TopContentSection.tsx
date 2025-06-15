@@ -81,7 +81,6 @@ const TopContentSection = () => {
           Nội dung{" "}
           <Box
             component='span'
-            sx={{ fontFamily: `"Courgette", cursive` }}
             fontWeight={600}
             fontStyle='italic'
             color='#f26522'>

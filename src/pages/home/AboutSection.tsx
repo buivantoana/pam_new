@@ -93,8 +93,20 @@ const AboutSection = ({ image }) => {
                 initial='hidden'
                 whileInView='visible'
                 viewport={{ once: true }}>
-                <Box mb={2} width={isMobile ? "60%" : "60%"}>
-                  <img src={AboutImage4} width={"100%"} />
+                <Box mb={2}>
+                  {/* <img src={AboutImage4} width={"100%"} /> */}
+                  <Typography
+                    fontWeight={"bold"}
+                    fontSize={isMobile ? "35px" : "64px"}>
+                    Về Chúng tôi <br />{" "}
+                    <Typography
+                      fontSize={isMobile ? "35px" : "64px"}
+                      fontWeight={"bold"}
+                      fontStyle={"italic"}
+                      color='rgba(255, 97, 25, 1)'>
+                      Pam-Media
+                    </Typography>
+                  </Typography>
                 </Box>
                 <Typography color='textSecondary' mb={3}>
                   Lorem ipsum is simply dummy text of the printing and
@@ -173,8 +185,21 @@ const AboutSection = ({ image }) => {
                 initial='hidden'
                 whileInView='visible'
                 viewport={{ once: true }}>
-                <Box mb={2} width={isMobile ? "60%" : "60%"}>
-                  <img src={AboutImage3} width={"100%"} />
+                <Box mb={2}>
+                  {/* <img src={AboutImage3} width={"100%"} /> */}
+                  <Typography
+                    fontWeight={"bold"}
+                    fontSize={isMobile ? "35px" : "64px"}>
+                    Hướng tới tương <br /> lai{" "}
+                    <Typography
+                      variant='span'
+                      fontSize={isMobile ? "35px" : "64px"}
+                      fontWeight={"bold"}
+                      fontStyle={"italic"}
+                      color='rgba(162, 191, 0, 1)'>
+                      kỷ nguyên số
+                    </Typography>
+                  </Typography>
                 </Box>
                 <Typography color='textSecondary' mb={3}>
                   Lorem ipsum is simply dummy text of the printing and

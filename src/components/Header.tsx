@@ -15,7 +15,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import Logo from "../images/Frame 10.png"; // Replace with actual logo path
+import Logo from "../images/dabeb7fcebd00c596297e51a1cf6134d57e64622.png"; // Replace with actual logo path
 import { Popover } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 const Header = () => {
@@ -63,7 +63,10 @@ const Header = () => {
           }}>
           {/* Logo */}
           <Box display='flex' alignItems='center' gap={1}>
-            <img src={Logo} alt='Pam Media' />
+            <img src={Logo} width={48} height={48} alt='Pam Media' />
+            <Typography fontWeight={"bold"} fontSize={"16px"}>
+              Pam Media
+            </Typography>
           </Box>
 
           {isMobile ? (
@@ -102,7 +105,7 @@ const Header = () => {
                       color: currentPath === "/chanel" ? "#f26522" : "inherit",
                       fontWeight: currentPath === "/chanel" ? "700" : "500",
                     }}>
-                    Kênh
+                    Hệ thống sản phẩm
                   </MenuItem>
                   <MenuItem
                     onClick={() => {
@@ -145,6 +148,7 @@ const Header = () => {
                   </MenuItem>
                   <MenuItem>
                     <Button
+                      onClick={() => navigate("/contact")}
                       variant='outlined'
                       sx={{
                         borderColor: "#f26522",
@@ -184,7 +188,7 @@ const Header = () => {
                 }}
                 onClick={handleChannelClick}>
                 <Typography variant='body1' fontWeight={500}>
-                  Kênh
+                  Hệ thống sản phẩm
                 </Typography>
                 <ExpandMoreIcon fontSize='small' />
               </Box>
@@ -227,6 +231,7 @@ const Header = () => {
           {!isMobile && (
             <Button
               variant='outlined'
+              onClick={() => navigate("/contact")}
               sx={{
                 borderColor: "#f26522",
                 color: "#f26522",

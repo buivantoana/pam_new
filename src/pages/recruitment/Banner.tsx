@@ -143,7 +143,7 @@ const Banner = ({ image }) => {
               fontWeight: "700",
               color: "#f26522",
               fontSize: isMobile ? "26px" : "65px",
-              fontFamily: `"Courgette", cursive`,
+              fontStyle: "italic",
             }}>
             Pam-Media
           </span>

@@ -13,7 +13,15 @@ import {
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import { motion } from "framer-motion";
 
-const positions = ["Designer", "Developer", "Marketer", "Content Creator"];
+const positions = [
+  "Chuyên viên nhân sự",
+  "Dựng phim/Video Editor",
+  "Chuyên viên kế toán",
+  "Biên kịch",
+  "Diễn hoạt 2D Animation",
+  "Quản trị kênh",
+  "Đạo cụ (DIY/Handmade)",
+];
 
 const fadeInUp = (delay = 0) => ({
   hidden: { opacity: 0, y: 20 },

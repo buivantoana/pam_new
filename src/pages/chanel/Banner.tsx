@@ -99,7 +99,7 @@ const Banner = () => {
                 sx={{
                   color: "#f26522",
                   fontSize: isMobile ? "26px" : "65px",
-                  fontFamily: `"Courgette", cursive`,
+                  fontStyle: "italic",
                 }}>
                 Lyly and Pam
               </Typography>
