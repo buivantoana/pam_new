@@ -22,6 +22,8 @@ import HomeController from "../pages/admin/image/HomeController";
 import RecruitmentImageController from "../pages/admin/image/RecruitmentImageController";
 import CooperateImageController from "../pages/admin/image/CooperateImageController";
 import ContactController from "../pages/contact/ContactController";
+import ProductController from "../pages/admin/products/ProductsController";
+import CompanyController from "../pages/admin/company/CompanyController";
 
 const Router = () => {
   const context: any = useCoursesContext();
@@ -50,6 +52,8 @@ const Router = () => {
             </PrivateRouter>
           }>
           <Route path='category' element={<CategoryController />} />
+          <Route path='company' element={<CompanyController />} />
+          <Route path='product' element={<ProductController />} />
           <Route path='post' element={<PostsController />} />
           <Route path='home-image' element={<HomeController />} />
           <Route

@@ -65,7 +65,7 @@ const BannerBrandPartners = ({ image }) => {
           variant={isMobile ? "h6" : "h4"}
           fontWeight='bold'
           mb={2}>
-          Đối tác thương hiệu
+         { image?.cooperate?.title ? image?.cooperate?.title  :"Đối tác thương hiệu"} 
         </Typography>
 
         <Typography
@@ -75,20 +75,11 @@ const BannerBrandPartners = ({ image }) => {
           transition={{ duration: 0.8, delay: 0.4 }}
           variant={isMobile ? "body2" : "body1"}
           mb={1}>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy.
+          { image?.cooperate?.description ? image?.cooperate?.description :`Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy.`}  
         </Typography>
 
-        <Typography
-          component={motion.div}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          variant={isMobile ? "body2" : "body1"}
-          mb={1}>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy.
-        </Typography>
+      
       </Container>
     </Box>
   );

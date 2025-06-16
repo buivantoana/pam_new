@@ -7,17 +7,10 @@ import {
   useMediaQuery,
   Grid,
   Card,
-  CardMedia,
   CardContent,
   Button,
+  TextField,
 } from "@mui/material";
-
-// Images
-import banner from "../../../images/1fa47c58664fc06c9fc374d0ccb62914013f9d63.png";
-import image1 from "../../../images/1.png";
-import image2 from "../../../images/2.png";
-import khangia1 from "../../../images/khangia1.png";
-import khangia2 from "../../../images/khangia2.png";
 import { useDropzone } from "react-dropzone";
 import { uploadImage } from "../../../service/uploadService";
 import {
@@ -27,18 +20,9 @@ import {
 } from "../../../service/manage_image";
 import Loading from "../../../components/Loading";
 
-const mockData = {
-  homeBanner: {
-    image1:
-      "https://res.cloudinary.com/dbmj1ajrv/image/upload/v1749611782/uploads/n9gxzkku1vnckcppvi3k.jpg",
-    image2:
-      "https://res.cloudinary.com/dbmj1ajrv/image/upload/v1749611782/uploads/n9gxzkku1vnckcppvi3k.jpg",
-    image3:
-      "https://res.cloudinary.com/dbmj1ajrv/image/upload/v1749611782/uploads/n9gxzkku1vnckcppvi3k.jpg",
-    topImage:
-      "https://res.cloudinary.com/dbmj1ajrv/image/upload/v1749611782/uploads/n9gxzkku1vnckcppvi3k.jpg",
-  },
-};
+// Images
+import khangia1 from "../../../images/khangia1.png";
+import khangia2 from "../../../images/khangia2.png";
 
 // Reusable Dropzone
 const ImageDropzone = ({ onUpload, defaultUrl }) => {
@@ -69,12 +53,13 @@ const ImageDropzone = ({ onUpload, defaultUrl }) => {
         width: "100%",
         color: "black",
         height: "100%",
-      }}>
+      }}
+    >
       <input {...getInputProps()} />
       {displayImage ? (
         <img
           src={displayImage}
-          alt='preview'
+          alt="preview"
           style={{ width: "100%", borderRadius: 8, height: "100%" }}
         />
       ) : (
@@ -83,29 +68,33 @@ const ImageDropzone = ({ onUpload, defaultUrl }) => {
     </Box>
   );
 };
+
 const audienceData = [
-  { title: "Trẻ em", image: image1 },
-  { title: "Thanh thiếu niên và các thành viên trong gia đình", image: image2 },
-  { title: "Gen Z", image: null }, // Sẽ sử dụng fetchedImage
+  { title: "Trẻ em", image: null },
+  { title: "Thanh thiếu niên và các thành viên trong gia đình", image: null },
+  { title: "Gen Z", image: null },
 ];
 
-const CooperateImageController = (props: Props) => {
+const CooperateImageController = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
   const [image3, setImage3] = useState(null);
   const [topImage, setTopImage] = useState(null);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [name, setName] = useState(null);
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     getImage();
   }, []);
 
-  let getImage = async () => {
+  const getImage = async () => {
     try {
       let result = await getImageByName("cooperate");
-      if (result && result.status == 0) {
+      if (result && result.status === 0) {
         setName(result.data.name);
         if (result.data.cooperate?.image1)
           setImage1(result.data.cooperate.image1);
@@ -115,56 +104,68 @@ const CooperateImageController = (props: Props) => {
           setImage3(result.data.cooperate.image3);
         if (result.data.cooperate?.topImage)
           setTopImage(result.data.cooperate.topImage);
+        if (result.data.cooperate?.title)
+          setTitle(result.data.cooperate.title);
+        if (result.data.cooperate?.description)
+          setDescription(result.data.cooperate.description);
       }
     } catch (error) {
       console.log(error);
     }
   };
+
   const handleUpload = async () => {
     setLoading(true);
     try {
-      const homeBanner: any = {};
+      const cooperate: any = {};
 
-      // Upload ảnh phải nếu là file
+      // Upload image1 if it's a file
       if (image1 instanceof File) {
         const formData = new FormData();
         formData.append("image", image1);
         const upload = await uploadImage(formData);
-        if (upload?.url) homeBanner.image1 = upload.url;
+        if (upload?.url) cooperate.image1 = upload.url;
       } else {
-        homeBanner.image1 = image1; // giữ nguyên
+        cooperate.image1 = image1;
       }
 
-      // Upload ảnh trái nếu là file
+      // Upload image2 if it's a file
       if (image2 instanceof File) {
         const formData = new FormData();
         formData.append("image", image2);
         const upload = await uploadImage(formData);
-        if (upload?.url) homeBanner.image2 = upload.url;
+        if (upload?.url) cooperate.image2 = upload.url;
       } else {
-        homeBanner.image2 = image2; // giữ nguyên
+        cooperate.image2 = image2;
       }
 
+      // Upload image3 if it's a file
       if (image3 instanceof File) {
         const formData = new FormData();
         formData.append("image", image3);
         const upload = await uploadImage(formData);
-        if (upload?.url) homeBanner.image3 = upload.url;
+        if (upload?.url) cooperate.image3 = upload.url;
       } else {
-        homeBanner.image3 = image3; // giữ nguyên
+        cooperate.image3 = image3;
       }
+
+      // Upload topImage if it's a file
       if (topImage instanceof File) {
         const formData = new FormData();
         formData.append("image", topImage);
         const upload = await uploadImage(formData);
-        if (upload?.url) homeBanner.topImage = upload.url;
+        if (upload?.url) cooperate.topImage = upload.url;
       } else {
-        homeBanner.topImage = topImage; // giữ nguyên
+        cooperate.topImage = topImage;
       }
+
+      // Add title and description
+      cooperate.title = title;
+      cooperate.description = description;
 
       const resultBody = {
         name: "cooperate",
-        cooperate: homeBanner,
+        cooperate,
       };
 
       let result;
@@ -173,21 +174,20 @@ const CooperateImageController = (props: Props) => {
       } else {
         result = await createImage(resultBody);
       }
-      if (result && result.status == 0) {
+      if (result && result.status === 0) {
         getImage();
       }
-      console.log("Body gửi về:", resultBody);
+      console.log("Body sent:", resultBody);
     } catch (error) {
-      console.error("Upload thất bại:", error);
+      console.error("Upload failed:", error);
     }
     setLoading(false);
   };
 
-  // Fetch image from URL
-
-  // Cập nhật audienceData với fetchedImage
   const updatedAudienceData = audienceData.map((item, index) =>
-    index === 2 ? { ...item } : item
+    index === 0 ? { ...item, image: image1 } :
+    index === 1 ? { ...item, image: image2 } :
+    { ...item, image: image3 }
   );
 
   return (
@@ -195,23 +195,24 @@ const CooperateImageController = (props: Props) => {
       {loading && <Loading />}
       <Container>
         <Box
-          display={"flex"}
+          display="flex"
           my={4}
-          justifyContent={"space-between"}
-          alignItems={"center"}>
-          <Typography variant='h4' fontWeight={"bold"}>
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Typography variant="h4" fontWeight="bold">
             Quản lý ảnh trang hợp tác
           </Typography>
-          <Button variant='contained' color='primary' onClick={handleUpload}>
+          <Button variant="contained" color="primary" onClick={handleUpload}>
             Upload Dữ Liệu
           </Button>
         </Box>
         <Box
+       
           sx={{
-            position: "relative",
+          
             width: "100%",
-            height: { xs: "100%", md: "450px" },
-
+            
             backgroundSize: "cover",
             backgroundPosition: "center",
             display: "flex",
@@ -221,14 +222,44 @@ const CooperateImageController = (props: Props) => {
             textAlign: "center",
             px: isMobile ? 0 : 2,
             py: isMobile ? 3 : 0,
-          }}>
-          {/* Overlay làm mờ nền */}
-
-          {/* Nội dung */}
-          <ImageDropzone
-            onUpload={(file) => setTopImage(file)}
-            defaultUrl={typeof topImage === "string" ? topImage : null}
-          />
+          
+          }}
+        >
+          <Box sx={{ width: "100%",  }}>
+            <ImageDropzone
+              onUpload={(file) => setTopImage(file)}
+              defaultUrl={typeof topImage === "string" ? topImage : null}
+            />
+            <TextField
+              fullWidth
+              label="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              sx={{ mt: 2, backgroundColor: "#fff" }}
+            />
+            <TextField
+              fullWidth
+              label="Description"
+              multiline
+              rows={4}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              sx={{ mt: 2, backgroundColor: "#fff" }}
+            />
+            <Typography
+              variant="h4"
+              fontWeight="bold"
+              sx={{ mt: 2, color: "#fff" }}
+            >
+              {title}
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{ mt: 1, color: "#fff" }}
+            >
+              {description}
+            </Typography>
+          </Box>
         </Box>
 
         {/* AudienceSection */}
@@ -238,14 +269,15 @@ const CooperateImageController = (props: Props) => {
             py: 6,
             textAlign: "center",
             position: "relative",
-          }}>
+          }}
+        >
           {/* Floating decorative images */}
           {!isMobile && (
             <>
               <Box
-                component='img'
+                component="img"
                 src={khangia1}
-                alt='decor1'
+                alt="decor1"
                 sx={{
                   position: "absolute",
                   bottom: 50,
@@ -253,9 +285,9 @@ const CooperateImageController = (props: Props) => {
                 }}
               />
               <Box
-                component='img'
+                component="img"
                 src={khangia2}
-                alt='decor2'
+                alt="decor2"
                 sx={{
                   position: "absolute",
                   top: 50,
@@ -265,7 +297,7 @@ const CooperateImageController = (props: Props) => {
             </>
           )}
 
-          <Typography variant={isMobile ? "h6" : "h3"} fontWeight='500' mb={4}>
+          <Typography variant={isMobile ? "h6" : "h3"} fontWeight="500" mb={4}>
             Khán giả chính của{" "}
             <span style={{ color: "#f2784b", fontStyle: "italic" }}>
               Pam-Media
@@ -273,8 +305,8 @@ const CooperateImageController = (props: Props) => {
             <span style={{ color: "#f2784b" }}>✨</span>
           </Typography>
 
-          <Container maxWidth='lg'>
-            <Grid container spacing={4} justifyContent='center'>
+          <Container maxWidth="lg">
+            <Grid container spacing={4} justifyContent="center">
               {updatedAudienceData.map((audience, index) => (
                 <Grid item xs={12} sm={6} md={4} key={index}>
                   <Card
@@ -284,20 +316,21 @@ const CooperateImageController = (props: Props) => {
                       boxShadow: 3,
                       position: "relative",
                       height: "300px",
-                    }}>
-                    {index == 0 && (
+                    }}
+                  >
+                    {index === 0 && (
                       <ImageDropzone
                         onUpload={(file) => setImage1(file)}
                         defaultUrl={typeof image1 === "string" ? image1 : null}
                       />
                     )}
-                    {index == 1 && (
+                    {index === 1 && (
                       <ImageDropzone
                         onUpload={(file) => setImage2(file)}
                         defaultUrl={typeof image2 === "string" ? image2 : null}
                       />
                     )}
-                    {index == 2 && (
+                    {index === 2 && (
                       <ImageDropzone
                         onUpload={(file) => setImage3(file)}
                         defaultUrl={typeof image3 === "string" ? image3 : null}
@@ -312,8 +345,9 @@ const CooperateImageController = (props: Props) => {
                         textAlign: "center",
                         fontWeight: "bold",
                         padding: "0px !important",
-                      }}>
-                      <Typography variant='subtitle1' fontWeight='bold'>
+                      }}
+                    >
+                      <Typography variant="subtitle1" fontWeight="bold">
                         {audience.title}
                       </Typography>
                     </CardContent>

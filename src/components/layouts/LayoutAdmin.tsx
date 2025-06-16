@@ -335,6 +335,31 @@ const LayoutAdmin = () => {
                 </ListItem>
               </List>
               <Divider />
+              <List sx={{ px: "10px" }}>
+                <ListItem
+                  sx={{
+                    a: {
+                      color: "white",
+                      width: "100%",
+                      textDecoration: "none",
+                    },
+                    background: active.category ? "#2e3650" : undefined,
+                    border: active.category ? "1px solid #4c5680" : "none",
+                    borderRadius: active.category ? "5px" : "none",
+                  }}
+                  disablePadding>
+                  <Link to={"/admin/product"}>
+                    <CustomListItemButton>
+                      <ListItemIcon
+                        sx={{ display: "flex", justifyContent: "center" }}>
+                        <RiUser3Fill color={"white"} />
+                      </ListItemIcon>
+                      <ListItemText primary={"Sản phẩm"} />
+                    </CustomListItemButton>
+                  </Link>
+                </ListItem>
+              </List>
+              <Divider />
               {/* <List sx={{ px: "10px" }}>
                 <ListItem
                   sx={{

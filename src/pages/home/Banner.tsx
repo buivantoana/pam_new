@@ -43,7 +43,7 @@ const floatImage = {
   }),
 };
 
-const Banner = () => {
+const Banner = ({image}) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const navigate = useNavigate();
@@ -64,37 +64,45 @@ const Banner = () => {
       {/* Background Images with Animation */}
       {[
         {
-          src: bannerLeftTop,
+          src:image && image?.homeBanner?.bannerLeftTop
+          ? image.homeBanner?.bannerLeftTop : bannerLeftTop,
           top: isMobile ? 100 : 100,
           left: isMobile ? 0 : 150,
+          isCheck:image && image?.homeBanner?.bannerLeftTop
         },
         { src: vector2, top: 300, left: 350, hiddenMobile: true },
         { src: icon_left, top: 120, left: 0, hiddenMobile: true },
         { src: icon_left1, bottom: 20, left: "2vw", hiddenMobile: true },
         { src: vector, bottom: 200, left: 0, hiddenMobile: true },
         {
-          src: bannerLeftBottom,
+          src: image && image?.homeBanner?.bannerLeftBottom
+          ? image.homeBanner?.bannerLeftBottom : bannerLeftBottom,
           bottom: isMobile ? "40%" : 150,
           left: isMobile ? 0 : 130,
+          isCheck: image && image?.homeBanner?.bannerLeftBottom
         },
-        { src: bannerRightTop, top: 80, right: isMobile ? 0 : 150 },
+        { src: image && image?.homeBanner?.bannerRightTop
+          ? image.homeBanner?.bannerRightTop : bannerRightTop, top: 80, right: isMobile ? 0 : 150,isCheck:image && image?.homeBanner?.bannerRightTop },
         { src: icon_right1, top: 100, right: 360, hiddenMobile: true },
         { src: icon_right, top: 350, right: 0, hiddenMobile: true },
         { src: vector3, top: 150, right: 0, hiddenMobile: true },
         {
-          src: bannerRightBottom,
+          src: image && image?.homeBanner?.bannerRightBottom
+          ? image.homeBanner?.bannerRightBottom : bannerRightBottom,
           bottom: isMobile ? "40%" : 120,
           right: isMobile ? 0 : 150,
+          isCheck:image && image?.homeBanner?.bannerRightBottom
         },
       ].map((img, idx) => {
         const styles: any = {
           position: "absolute",
-          width: isMobile ? 100 : "unset",
+          width: isMobile ? 100 : img.isCheck ? "200px" :"unset",
           ...("top" in img && { top: img.top }),
           ...("bottom" in img && { bottom: img.bottom }),
           ...("left" in img && { left: img.left }),
           ...("right" in img && { right: img.right }),
           display: img.hiddenMobile && isMobile ? "none" : "block",
+          borderRadius : img.isCheck ?"10px" :"unset"
         };
         return (
           <motion.img
@@ -138,7 +146,7 @@ const Banner = () => {
           sx={{ fontSize: isMobile ? "26px" : "65px", fontStyle: "italic" }}
           fontWeight={700}
           mt={1}>
-          Passion Awakens <br /> Miracles
+          {image && image?.homeBanner?.title2 ?image && image?.homeBanner?.title2 :"Passion Awakens <br /> Miracles"}
         </Typography>
       </motion.div>
 
@@ -152,8 +160,9 @@ const Banner = () => {
           my={4}
           mx='auto'
           fontSize={isMobile ? "12px" : "inherit"}>
-          Văn hóa biết ơn không chỉ nằm ở lời nói, mà thể hiện qua cách PAM xây
-          dựng một môi trường làm việc tử tế, tích cực và gắn kết.
+            {image && image?.homeBanner?.title2 ?image && image?.homeBanner?.description :` Văn hóa biết ơn không chỉ nằm ở lời nói, mà thể hiện qua cách PAM xây
+          dựng một môi trường làm việc tử tế, tích cực và gắn kết.`}
+        
         </Typography>
       </motion.div>
 

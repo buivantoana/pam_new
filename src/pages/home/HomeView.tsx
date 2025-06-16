@@ -8,7 +8,7 @@ import PartnersSection from "./PartnersSection";
 const HomeView = ({ image }: any) => {
   return (
     <Box sx={{ background: "white" }}>
-      <Banner />
+      <Banner image={image} />
       <AboutSection image={image} />
       <Container maxWidth='lg'>
         <ChannelSlider image={image} />

@@ -56,7 +56,7 @@ const ChannelSlider = ({ image }) => {
           variant={isMobile ? "h5" : "h3"}
           fontWeight={500}
           mb={4}>
-          Hệ thống kênh của{" "}
+          Hệ thống Sản phẩm {" "}
           <Box
             component='span'
             sx={{}}
