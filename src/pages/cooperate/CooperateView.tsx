@@ -16,7 +16,7 @@ const CooperateView = ({ image }: any) => {
       <BannerBrandPartners image={image} />
       <PartnersSection />
       <AudienceSection image={image} />
-      <TopContentSection />
+      <TopContentSection image={image} />
       <IPCardSection />
     </Box>
   );

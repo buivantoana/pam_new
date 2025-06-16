@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -7,59 +7,64 @@ import {
   IconButton,
   useTheme,
   useMediaQuery,
-  Container
-} from '@mui/material';
-import {
-  Instagram,
-  Facebook,
-  YouTube,
-  LinkedIn,
-} from '@mui/icons-material';
+  Container,
+} from "@mui/material";
+import { Instagram, Facebook, YouTube, LinkedIn } from "@mui/icons-material";
 import Logo from "../images/Frame 10.png";
-import { RiTiktokFill } from 'react-icons/ri';
+import { RiTiktokFill } from "react-icons/ri";
+import { getAllCompanies } from "../service/company";
 const Footer = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const [companies, setCompanies] = useState(null);
+  const fetchCompanies = async () => {
+    try {
+      const res = await getAllCompanies();
+      if (res.status === 0 && res.data && res.data[0]) {
+        setCompanies(res.data[0]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  useEffect(() => {
+    fetchCompanies();
+  }, []);
   return (
-    <Box sx={{ backgroundColor: '#fff' }}>
-      <Container maxWidth="lg" sx={{ pt: 6, pb: 2, }}>
-        <Grid container spacing={4} justifyContent="space-between">
+    <Box sx={{ backgroundColor: "#fff" }}>
+      <Container maxWidth='lg' sx={{ pt: 6, pb: 2 }}>
+        <Grid container spacing={4} justifyContent='space-between'>
           {/* Thông tin công ty */}
           <Grid item xs={12} md={4}>
-            <Box display="flex" alignItems="center" mb={1}>
+            <Box display='flex' alignItems='center' mb={1}>
               <Box
-                component="img"
+                component='img'
                 src={Logo} // Thay bằng logo thật nếu cần
-                alt="Logo"
+                alt='Logo'
                 sx={{ mr: 1 }}
               />
-
             </Box>
 
-            <Typography variant="body2" color="textSecondary" mb={3}>
-              Địa chỉ: Lorem Ipsum is simply dummy text of the printing and typesetting
+            <Typography variant='body2' color='textSecondary' mb={3}>
+              Địa chỉ: {companies && companies?.address}
             </Typography>
-            <Typography variant="body2" color="textSecondary" mb={3}>
-              Mail: LoremIpsum@gmail.com
+            <Typography variant='body2' color='textSecondary' mb={3}>
+              Mail: {companies && companies?.email}
             </Typography>
-            <Typography variant="body2" color="textSecondary" mb={2}>
-              Điện thoại: 123456789
+            <Typography variant='body2' color='textSecondary' mb={2}>
+              Điện thoại: {companies && companies?.phone}
             </Typography>
 
             <Box>
               {[
-                { icon: <Instagram />, color: '#E4405F' },
-                { icon: <Facebook />, color: '#1877F2' },
-                { icon: <RiTiktokFill />, color: '#000000' },
-                { icon: <LinkedIn />, color: '#0077B5' },
-                { icon: <YouTube />, color: '#FF0000' }
+                { icon: <Instagram />, color: "#E4405F" },
+                { icon: <Facebook />, color: "#1877F2" },
+                { icon: <RiTiktokFill />, color: "#000000" },
+                { icon: <LinkedIn />, color: "#0077B5" },
+                { icon: <YouTube />, color: "#FF0000" },
               ].map((item, idx) => (
-                <IconButton
-                  key={idx}
-                  sx={{ color: item.color }}
-                  size="large"
-                >
+                <IconButton key={idx} sx={{ color: item.color }} size='large'>
                   {item.icon}
                 </IconButton>
               ))}
@@ -68,14 +73,14 @@ const Footer = () => {
 
           {/* Menu giữa */}
           <Grid item xs={6} md={4}>
-            <Box display="flex" flexDirection="column" gap={1}>
-              <Link href="#" underline="none" color="textPrimary">
+            <Box display='flex' flexDirection='column' gap={1}>
+              <Link href='#' underline='none' color='textPrimary'>
                 Về chúng tôi
               </Link>
-              <Link href="#" underline="none" color="textPrimary">
+              <Link href='#' underline='none' color='textPrimary'>
                 Kênh
               </Link>
-              <Link href="#" underline="none" color="textPrimary">
+              <Link href='#' underline='none' color='textPrimary'>
                 Hợp tác
               </Link>
             </Box>
@@ -83,11 +88,11 @@ const Footer = () => {
 
           {/* Menu phải */}
           <Grid item xs={6} md={4}>
-            <Box display="flex" flexDirection="column" gap={1}>
-              <Link href="#" underline="none" color="textPrimary">
+            <Box display='flex' flexDirection='column' gap={1}>
+              <Link href='#' underline='none' color='textPrimary'>
                 Tuyển dụng
               </Link>
-              <Link href="#" underline="none" color="textPrimary">
+              <Link href='#' underline='none' color='textPrimary'>
                 Tin tức
               </Link>
             </Box>
@@ -95,21 +100,40 @@ const Footer = () => {
         </Grid>
 
         {/* Dòng cuối */}
-        <Grid container justifyContent="space-between" alignItems="center" sx={{ mt: 4 }}>
+        <Grid
+          container
+          justifyContent='space-between'
+          alignItems='center'
+          sx={{ mt: 4 }}>
           <Grid item>
-            <Typography fontWeight={"bold"} variant="body2" style={{fontWeight:"bold"}}>
+            <Typography
+              fontWeight={"bold"}
+              variant='body2'
+              style={{ fontWeight: "bold" }}>
               © 2025 Pam Media. Bảo lưu mọi quyền
             </Typography>
           </Grid>
           <Grid item>
-            <Box display="flex" fontWeight={"bold"} gap={2}>
-              <Link href="#" underline="none" variant="body2" style={{fontWeight:"bold",color:"black"}}>
+            <Box display='flex' fontWeight={"bold"} gap={2}>
+              <Link
+                href='#'
+                underline='none'
+                variant='body2'
+                style={{ fontWeight: "bold", color: "black" }}>
                 Điều khoản
               </Link>
-              <Link href="#" underline="none" variant="body2" style={{fontWeight:"bold",color:"black"}}>
+              <Link
+                href='#'
+                underline='none'
+                variant='body2'
+                style={{ fontWeight: "bold", color: "black" }}>
                 Bảo mật
               </Link>
-              <Link href="#" underline="none" variant="body2" style={{fontWeight:"bold",color:"black"}}>
+              <Link
+                href='#'
+                underline='none'
+                variant='body2'
+                style={{ fontWeight: "bold", color: "black" }}>
                 Cookie
               </Link>
             </Box>

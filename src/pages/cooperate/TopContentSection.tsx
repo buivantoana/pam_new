@@ -20,15 +20,6 @@ import icon5 from "../../images/icon5.png";
 import icon6 from "../../images/icon6.png";
 import noidung from "../../images/noidung.png";
 
-const contentItems = [
-  { title: "Live action", image: icon1 },
-  { title: "Stop motion hand made", image: icon2 },
-  { title: "Music", image: icon3 },
-  { title: "2D", image: icon4 },
-  { title: "Game", image: icon5 },
-  { title: "Animal", image: icon6 },
-];
-
 const floatAnimation = {
   animate: {
     y: [0, -10, 0],
@@ -40,10 +31,39 @@ const floatAnimation = {
   },
 };
 
-const TopContentSection = () => {
+const TopContentSection = ({ image }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
+  const contentItems = [
+    {
+      title: image?.cooperate?.title4
+        ? image?.cooperate?.title4
+        : "Live action",
+      image: image?.cooperate?.image4 ? image?.cooperate?.image4 : icon1,
+    },
+    {
+      title: image?.cooperate?.title5
+        ? image?.cooperate?.title5
+        : "Stop motion hand made",
+      image: image?.cooperate?.image5 ? image?.cooperate?.image5 : icon2,
+    },
+    {
+      title: image?.cooperate?.title6 ? image?.cooperate?.title6 : "Music",
+      image: image?.cooperate?.image6 ? image?.cooperate?.image6 : icon3,
+    },
+    {
+      title: image?.cooperate?.title7 ? image?.cooperate?.title7 : "2D",
+      image: image?.cooperate?.image7 ? image?.cooperate?.image7 : icon4,
+    },
+    {
+      title: image?.cooperate?.title8 ? image?.cooperate?.title8 : "Game",
+      image: image?.cooperate?.image8 ? image?.cooperate?.image8 : icon5,
+    },
+    {
+      title: image?.cooperate?.title9 ? image?.cooperate?.title9 : "Animal",
+      image: image?.cooperate?.image9 ? image?.cooperate?.image9 : icon6,
+    },
+  ];
   return (
     <Box
       component={motion.div}

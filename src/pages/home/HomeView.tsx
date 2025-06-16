@@ -13,7 +13,7 @@ const HomeView = ({ image }: any) => {
       <Container maxWidth='lg'>
         <ChannelSlider image={image} />
       </Container>
-      <PartnersSection />
+      <PartnersSection image={image} />
     </Box>
   );
 };

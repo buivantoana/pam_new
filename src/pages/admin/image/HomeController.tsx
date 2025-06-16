@@ -49,13 +49,12 @@ const ImageDropzone = ({ onUpload, defaultUrl }) => {
         cursor: "pointer",
         backgroundColor: isDragActive ? "#f5f5f5" : "#fff",
         color: "black",
-      }}
-    >
+      }}>
       <input {...getInputProps()} />
       {displayImage ? (
         <img
           src={displayImage}
-          alt="preview"
+          alt='preview'
           style={{ width: "100%", borderRadius: 8 }}
         />
       ) : (
@@ -96,10 +95,9 @@ const SlideImageUploader = ({
         textAlign: "center",
         cursor: "pointer",
         backgroundColor: isDragActive ? "#f0f0f0" : "white",
-      }}
-    >
+      }}>
       <input {...getInputProps()} />
-      <Typography variant="body2">
+      <Typography variant='body2'>
         {isDragActive ? "Thả ảnh vào đây..." : "Kéo/Thả hoặc Click để chọn ảnh"}
       </Typography>
 
@@ -107,7 +105,7 @@ const SlideImageUploader = ({
         <Box mt={2}>
           <img
             src={displayImage}
-            alt="uploaded"
+            alt='uploaded'
             style={{
               width: "100%",
               maxHeight: 200,
@@ -144,19 +142,16 @@ const ChannelSlider = ({ slideImages, setSlideImages, defaultUrls = [] }) => {
   return (
     <Box py={6} px={2} sx={{ backgroundColor: "#fff" }}>
       <Typography
-        textAlign="center"
+        textAlign='center'
         variant={isMobile ? "h5" : "h3"}
         fontWeight={500}
-        mb={4}
-      >
+        mb={4}>
         Hệ thống kênh của{" "}
         <Box
-          component="span"
-          sx={{ fontFamily: `"Courgette", cursive` }}
+          component='span'
           fontWeight={600}
-          fontStyle="italic"
-          color="#f26522"
-        >
+          fontStyle='italic'
+          color='#f26522'>
           Pam-Media
         </Box>
       </Typography>
@@ -164,7 +159,7 @@ const ChannelSlider = ({ slideImages, setSlideImages, defaultUrls = [] }) => {
       <Slider {...sliderSettings}>
         {[...Array(5)].map((_, index) => (
           <Box key={index} px={2}>
-            <Typography variant="h6" textAlign="center" mb={2}>
+            <Typography variant='h6' textAlign='center' mb={2}>
               Slide {index + 1}
             </Typography>
             <SlideImageUploader
@@ -185,14 +180,14 @@ const Banner = ({
   bannerLeftBottom,
   bannerRightTop,
   bannerRightBottom,
-  
+
   title2,
   description,
   setBannerLeftTop,
   setBannerLeftBottom,
   setBannerRightTop,
   setBannerRightBottom,
-  
+
   setTitle2,
   setDescription,
 }) => {
@@ -202,94 +197,90 @@ const Banner = ({
   return (
     <Box
       px={2}
-      pt={isMobile ? 13 : "200px"}
-      textAlign="center"
-      height="auto"
+      pt={isMobile ? 13 : "50px"}
+      textAlign='center'
+      height='auto'
       pb={isMobile ? 3 : 5}
       sx={{
         overflow: "hidden",
-       
+
         position: "relative",
         backgroundRepeat: "no-repeat",
         backgroundSize: "100% 100%",
-      }}
-    >
-     
-
+      }}>
       {/* Banner Image Uploaders */}
       <Box mb={4} sx={{ position: "relative", zIndex: 2 }}>
-        <Grid container spacing={2} justifyContent="center">
+        <Grid container spacing={2} justifyContent='center'>
           <Grid item xs={12} sm={6} md={3}>
-            <Typography variant="body1" mb={1} fontWeight={600}>
+            <Typography variant='body1' mb={1} fontWeight={600}>
               Banner Left Top
             </Typography>
             <ImageDropzone
               onUpload={(file) => setBannerLeftTop(file)}
-              defaultUrl={typeof bannerLeftTop === "string" ? bannerLeftTop : null}
+              defaultUrl={
+                typeof bannerLeftTop === "string" ? bannerLeftTop : null
+              }
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <Typography variant="body1" mb={1} fontWeight={600}>
+            <Typography variant='body1' mb={1} fontWeight={600}>
               Banner Left Bottom
             </Typography>
             <ImageDropzone
               onUpload={(file) => setBannerLeftBottom(file)}
-              defaultUrl={typeof bannerLeftBottom === "string" ? bannerLeftBottom : null}
+              defaultUrl={
+                typeof bannerLeftBottom === "string" ? bannerLeftBottom : null
+              }
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <Typography variant="body1" mb={1} fontWeight={600}>
+            <Typography variant='body1' mb={1} fontWeight={600}>
               Banner Right Top
             </Typography>
             <ImageDropzone
               onUpload={(file) => setBannerRightTop(file)}
-              defaultUrl={typeof bannerRightTop === "string" ? bannerRightTop : null}
+              defaultUrl={
+                typeof bannerRightTop === "string" ? bannerRightTop : null
+              }
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <Typography variant="body1" mb={1} fontWeight={600}>
+            <Typography variant='body1' mb={1} fontWeight={600}>
               Banner Right Bottom
             </Typography>
             <ImageDropzone
               onUpload={(file) => setBannerRightBottom(file)}
-              defaultUrl={typeof bannerRightBottom === "string" ? bannerRightBottom : null}
+              defaultUrl={
+                typeof bannerRightBottom === "string" ? bannerRightBottom : null
+              }
             />
           </Grid>
         </Grid>
       </Box>
 
       {/* Text Content */}
-      
 
       <Box sx={{ position: "relative", zIndex: 2 }}>
         <TextField
           fullWidth
-          label="Title"
+          label='Title'
           value={title2}
           onChange={(e) => setTitle2(e.target.value)}
-          sx={{ maxWidth: 600, mx: "auto", mb: 2 }}
+          sx={{ mx: "auto", mb: 2 }}
         />
-       
       </Box>
 
       <Box sx={{ position: "relative", zIndex: 2 }}>
         <TextField
           fullWidth
-          label="Description"
+          label='Description'
           multiline
           rows={4}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          sx={{ maxWidth: 600, mx: "auto", mb: 2 }}
+          sx={{ mx: "auto", mb: 2 }}
         />
-      
       </Box>
-
-     
-     
-
-    
-     
     </Box>
   );
 };
@@ -299,6 +290,7 @@ const HomeController = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const [rightImage, setRightImage] = useState(null);
+  const [bottomImage, setBottomImage] = useState(null);
   const [leftImage, setLeftImage] = useState(null);
   const [bannerLeftTop, setBannerLeftTop] = useState(null);
   const [bannerLeftBottom, setBannerLeftBottom] = useState(null);
@@ -325,6 +317,8 @@ const HomeController = () => {
         setName(result.data.name);
         if (result.data.homeBanner?.rightImage1)
           setRightImage(result.data.homeBanner.rightImage1);
+        if (result.data.homeBanner?.bottomImage)
+          setRightImage(result.data.homeBanner.bottomImage);
         if (result.data.homeBanner?.leftImage2)
           setLeftImage(result.data.homeBanner.leftImage2);
         if (result.data.homeBanner?.bannerLeftTop)
@@ -377,6 +371,14 @@ const HomeController = () => {
         if (upload?.url) homeBanner.leftImage2 = upload.url;
       } else {
         homeBanner.leftImage2 = leftImage;
+      }
+      if (bottomImage instanceof File) {
+        const formData = new FormData();
+        formData.append("image", bottomImage);
+        const upload = await uploadImage(formData);
+        if (upload?.url) homeBanner.bottomImage = upload.url;
+      } else {
+        homeBanner.bottomImage = bottomImage;
       }
 
       // Upload banner images if they're files
@@ -464,27 +466,26 @@ const HomeController = () => {
   return (
     <>
       {loading && <Loading />}
-      <Container maxWidth="lg" sx={{ background: "white", py: 3 }}>
+      <Container sx={{ background: "white", py: 3, width: "90%" }}>
         <Box
-          display="flex"
+          display='flex'
           my={3}
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <Typography variant="h4" fontWeight="bold">
+          justifyContent='space-between'
+          alignItems='center'>
+          <Typography variant='h4' fontWeight='bold'>
             Quản lý ảnh trang chủ
           </Typography>
-          <Button variant="contained" color="primary" onClick={handleUpload}>
+          <Button variant='contained' color='primary' onClick={handleUpload}>
             Upload Dữ Liệu
           </Button>
         </Box>
 
         {/* Banner Component */}
         <Banner
-          bannerLeftTop={bannerLeftTop }
-          bannerLeftBottom={bannerLeftBottom }
-          bannerRightTop={bannerRightTop }
-          bannerRightBottom={bannerRightBottom }
+          bannerLeftTop={bannerLeftTop}
+          bannerLeftBottom={bannerLeftBottom}
+          bannerRightTop={bannerRightTop}
+          bannerRightBottom={bannerRightBottom}
           title1={title1}
           title2={title2}
           description={description}
@@ -498,19 +499,19 @@ const HomeController = () => {
         />
 
         <Box sx={{ position: "relative" }}>
-          <Container maxWidth="lg" sx={{ position: "relative" }}>
+          <Container maxWidth='lg' sx={{ position: "relative" }}>
             <Box py={isMobile ? 2 : 8}>
-              <Grid container spacing={isMobile ? 6 : 5} alignItems="center">
+              <Grid container spacing={isMobile ? 6 : 5} alignItems='center'>
                 <Grid item xs={12} md={6}>
-                  <Box mb={2} width="60%">
-                    <img src={AboutImage3} width="100%" />
+                  <Box mb={2} width='60%'>
+                    <img src={AboutImage3} width='100%' />
                   </Box>
-                  <Typography color="textSecondary" mb={3}>
+                  <Typography color='textSecondary' mb={3}>
                     Lorem ipsum is simply dummy text of the printing and
                     typesetting industry.
                   </Typography>
                   <Button
-                    variant="outlined"
+                    variant='outlined'
                     sx={{
                       borderRadius: 20,
                       color: "#f26522",
@@ -523,13 +524,12 @@ const HomeController = () => {
                         color: "white",
                       },
                     }}
-                    endIcon={<ArrowForwardIcon />}
-                  >
+                    endIcon={<ArrowForwardIcon />}>
                     Liên Hệ Ngay
                   </Button>
                 </Grid>
 
-                <Grid item xs={12} md={6} textAlign="center">
+                <Grid item xs={12} md={6} textAlign='center'>
                   <ImageDropzone
                     onUpload={(file) => setRightImage(file)}
                     defaultUrl={
@@ -542,9 +542,8 @@ const HomeController = () => {
                   item
                   xs={12}
                   md={6}
-                  textAlign="center"
-                  order={{ xs: 3, md: 2 }}
-                >
+                  textAlign='center'
+                  order={{ xs: 3, md: 2 }}>
                   <ImageDropzone
                     onUpload={(file) => setLeftImage(file)}
                     defaultUrl={
@@ -554,15 +553,15 @@ const HomeController = () => {
                 </Grid>
 
                 <Grid item xs={12} md={6} order={{ xs: 2, md: 3 }}>
-                  <Box mb={2} width="60%">
-                    <img src={AboutImage4} width="100%" />
+                  <Box mb={2} width='60%'>
+                    <img src={AboutImage4} width='100%' />
                   </Box>
-                  <Typography color="textSecondary" mb={3}>
+                  <Typography color='textSecondary' mb={3}>
                     Lorem ipsum is simply dummy text of the printing and
                     typesetting industry.
                   </Typography>
                   <Button
-                    variant="outlined"
+                    variant='outlined'
                     sx={{
                       borderRadius: 20,
                       color: "#f26522",
@@ -575,8 +574,7 @@ const HomeController = () => {
                         color: "white",
                       },
                     }}
-                    endIcon={<ArrowForwardIcon />}
-                  >
+                    endIcon={<ArrowForwardIcon />}>
                     Liên Hệ Ngay
                   </Button>
                 </Grid>
@@ -591,6 +589,25 @@ const HomeController = () => {
           defaultUrls={
             Object.values(slideImages) ? Object.values(slideImages) : []
           }
+        />
+        <Typography
+          textAlign='center'
+          variant={isMobile ? "h5" : "h3"}
+          fontWeight={500}
+          mb={4}>
+          Đối tác kênh của{" "}
+          <Box
+            component='span'
+            sx={{}}
+            fontWeight={600}
+            fontStyle='italic'
+            color='#A2BF00'>
+            Pam-Media
+          </Box>
+        </Typography>
+        <ImageDropzone
+          onUpload={(file) => setBottomImage(file)}
+          defaultUrl={typeof bottomImage === "string" ? bottomImage : null}
         />
       </Container>
     </>

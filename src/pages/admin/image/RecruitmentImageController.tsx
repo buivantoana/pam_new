@@ -292,7 +292,7 @@ const RecruitmentImageController = (props: Props) => {
   return (
     <>
       {loading && <Loading />}
-      <Container>
+      <Container sx={{ width: "90%" }}>
         <Box
           display={"flex"}
           my={4}

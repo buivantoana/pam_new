@@ -20,7 +20,7 @@ const fadeInUp = {
   },
 };
 
-const AboutSection = () => {
+const AboutSection = ({ products }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -40,7 +40,7 @@ const AboutSection = () => {
           variants={fadeInUp}>
           <Box
             component='img'
-            src={AboutImage2}
+            src={products && products.avatar ? products.avatar : AboutImage2}
             alt='Pam Party'
             sx={{ maxWidth: "100%", borderRadius: 3, boxShadow: 3 }}
           />
@@ -67,12 +67,16 @@ const AboutSection = () => {
               variant='h1'
               fontSize={{ xs: "34px", md: "64px" }}
               fontWeight={"bold"}>
-              Lorem Ipsum simply dummy.
+              {products && products.name
+                ? products.name
+                : "Lorem Ipsum simply dummy."}
             </Typography>
           </Box>
           <Typography color='textSecondary' mb={3}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy.
+            {products && products.description
+              ? products.description
+              : `Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy.`}
           </Typography>
           <Button
             variant='outlined'

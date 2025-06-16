@@ -34,15 +34,17 @@ const AudienceSection = ({ image }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const audienceData = [
     {
-      title: "Trẻ em",
+      title: image?.cooperate?.title1 ? image?.cooperate?.title1 : "Trẻ em",
       image: image?.cooperate?.image1 ? image?.cooperate?.image1 : image1,
     },
     {
-      title: "Thanh thiếu niên và các thành viên trong gia đình",
+      title: image?.cooperate?.title2
+        ? image?.cooperate?.title2
+        : "Thanh thiếu niên và các thành viên trong gia đình",
       image: image?.cooperate?.image2 ? image?.cooperate?.image2 : image2,
     },
     {
-      title: "Gen Z",
+      title: image?.cooperate?.title3 ? image?.cooperate?.title3 : "Gen Z",
       image: image?.cooperate?.image3 ? image?.cooperate?.image3 : image3,
     },
   ];

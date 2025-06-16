@@ -17,7 +17,7 @@ import vector5 from "../../images/Element 8.png";
 import vector6 from "../../images/khangia2.png";
 type Props = {};
 
-const ChanelView = (props: Props) => {
+const ChanelView = ({ products }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
@@ -76,11 +76,11 @@ const ChanelView = (props: Props) => {
         }}
       />
 
-      <Banner />
+      <Banner products={products && products[0] ? products[0] : {}} />
       <Container maxWidth='lg' sx={{ bgcolor: "white" }}>
-        <AboutSection />
+        <AboutSection products={products && products[1] ? products[1] : {}} />
       </Container>
-      <IPCardSection />
+      <IPCardSection products={products} />
     </Box>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -18,9 +18,12 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Logo from "../images/dabeb7fcebd00c596297e51a1cf6134d57e64622.png"; // Replace with actual logo path
 import { Popover } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
+import { getAllProducts } from "../service/product";
 const Header = () => {
   const [channelAnchorEl, setChannelAnchorEl] = React.useState(null);
   const isChannelOpen = Boolean(channelAnchorEl);
+  const [products, setProducts] = useState([]);
+
   const location = useLocation();
   const currentPath = location.pathname;
   const navigate = useNavigate();
@@ -45,6 +48,21 @@ const Header = () => {
     setAnchorEl(null);
     setMobileMenuOpen(!mobileMenuOpen);
   };
+
+  const fetchAll = async () => {
+    try {
+      const resProducts = await getAllProducts();
+
+      if (resProducts && resProducts.status === 0)
+        setProducts(resProducts.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAll();
+  }, []);
 
   return (
     <Box
@@ -270,27 +288,19 @@ const Header = () => {
           horizontal: "left",
         }}>
         <Box sx={{ minWidth: 200 }}>
-          <MenuItem
-            onClick={() => {
-              handleChannelClose();
-              navigate("/chanel");
-            }}>
-            LyLy and Pam
-          </MenuItem>
-          <MenuItem
-            onClick={() => {
-              handleChannelClose();
-              navigate("/chanel");
-            }}>
-            Baby Shark
-          </MenuItem>
-          <MenuItem
-            onClick={() => {
-              handleChannelClose();
-              navigate("/chanel");
-            }}>
-            Adventure with John
-          </MenuItem>
+          {products &&
+            products.length > 0 &&
+            products.map((item) => {
+              return (
+                <MenuItem
+                  onClick={() => {
+                    handleChannelClose();
+                    navigate("/chanel");
+                  }}>
+                  {item.name}
+                </MenuItem>
+              );
+            })}
         </Box>
       </Popover>
     </Box>

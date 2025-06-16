@@ -3,7 +3,7 @@ import { Box, Typography, Grid, useTheme, useMediaQuery } from "@mui/material";
 import { motion } from "framer-motion";
 import patner from "../../images/Frame 1618871475.png";
 
-const PartnersSection = () => {
+const PartnersSection = ({ image }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -48,7 +48,11 @@ const PartnersSection = () => {
         <Grid item xs={12}>
           <Box
             component={motion.img}
-            src={patner}
+            src={
+              image && image?.homeBanner?.bottomImage
+                ? image.homeBanner?.bottomImage
+                : patner
+            }
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}

@@ -29,7 +29,7 @@ const fadeInUp = (delay = 0) => ({
   },
 });
 
-const Banner = () => {
+const Banner = ({ products }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -101,15 +101,17 @@ const Banner = () => {
                   fontSize: isMobile ? "26px" : "65px",
                   fontStyle: "italic",
                 }}>
-                Lyly and Pam
+                {products && products.name ? products.name : " Lyly and Pam"}
               </Typography>
               <Typography
                 maxWidth={600}
                 my={4}
                 mx='auto'
                 fontSize={isMobile ? "12px" : "inherit"}>
-                Văn hóa biết ơn không chỉ nằm ở lời nói, mà thể hiện qua cách
-                PAM xây dựng một môi trường làm việc tử tế, tích cực và gắn kết.
+                {products && products.description
+                  ? products.description
+                  : ` Văn hóa biết ơn không chỉ nằm ở lời nói, mà thể hiện qua cách
+                PAM xây dựng một môi trường làm việc tử tế, tích cực và gắn kết.`}
               </Typography>
               <Typography variant='h5' fontWeight={"bold"}>
                 Theo dõi và đăng ký
@@ -136,7 +138,11 @@ const Banner = () => {
             <motion.div variants={fadeInUp(0.2)}>
               <Box
                 component='img'
-                src={bannerRightBottom}
+                src={
+                  products && products.avatar
+                    ? products.avatar
+                    : bannerRightBottom
+                }
                 alt='Avatar 4'
                 sx={{ width: isMobile ? "100%" : "500px" }}
               />

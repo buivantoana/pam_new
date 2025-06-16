@@ -76,7 +76,7 @@ const cardVariants = {
   }),
 };
 
-export default function IPCardSection() {
+export default function IPCardSection({ products }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -88,85 +88,87 @@ export default function IPCardSection() {
         với IP nổi tiếng thế giới của chúng tôi!
       </Typography>
       <Grid container spacing={3}>
-        {data.map((item, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <motion.div
-              custom={index}
-              initial='hidden'
-              whileInView='visible'
-              viewport={{ once: true, amount: 0.3 }}
-              variants={cardVariants}>
-              <Card
-                sx={{
-                  p: 3,
-                  borderRadius: 3,
-                  height: "max-content",
-                  position: "relative",
-                  textAlign: "left",
-                }}>
-                <Avatar
-                  src={item.image}
-                  alt={item.title}
-                  sx={{ width: 90, height: 90 }}
-                />
-                <IconButton
+        {products &&
+          products.length > 0 &&
+          products.map((item, index) => (
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <motion.div
+                custom={index}
+                initial='hidden'
+                whileInView='visible'
+                viewport={{ once: true, amount: 0.3 }}
+                variants={cardVariants}>
+                <Card
                   sx={{
-                    position: "absolute",
-                    top: 20,
-                    right: 20,
-                    border: `1px solid ${item.color}`,
-                    color: item.color,
+                    p: 3,
+                    borderRadius: 3,
+                    height: "max-content",
+                    position: "relative",
+                    textAlign: "left",
                   }}>
-                  <ArrowForwardIosIcon fontSize='small' />
-                </IconButton>
-                <CardContent>
-                  <Typography
-                    variant='subtitle1'
-                    fontWeight='bold'
-                    color={"#A2BF00"}
-                    gutterBottom>
-                    {item.title}
-                  </Typography>
-                  <Typography variant='body2' color='text.secondary' mb={2}>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s,
-                  </Typography>
-                  <Stack spacing={2}>
-                    <Stat
-                      icon={PeopleAltIcon}
-                      text={item.subscribers}
-                      detail={item.detail}
-                      color={item.color}
-                    />
-                    <Stat
-                      icon={VisibilityIcon}
-                      text={item.views}
-                      detail={item.detail}
-                      color={item.color}
-                    />
-                    <Stat
-                      icon={VideoLibraryIcon}
-                      text={item.videos}
-                      detail={item.detail}
-                      color={item.color}
-                    />
-                  </Stack>
-                  <Stack
-                    direction='row'
-                    spacing={2}
-                    justifyContent='start'
-                    mt={3}>
-                    <FacebookIcon sx={{ fontSize: 25, color: "#FF5722" }} />
-                    <YouTubeIcon sx={{ fontSize: 25, color: "#FF5722" }} />
-                    <RiTiktokFill style={{ fontSize: 24, color: "#FF5722" }} />
-                    <InstagramIcon sx={{ fontSize: 25, color: "#FF5722" }} />
-                  </Stack>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </Grid>
-        ))}
+                  <Avatar
+                    src={item.avatar}
+                    alt={item.title}
+                    sx={{ width: 90, height: 90 }}
+                  />
+                  <IconButton
+                    sx={{
+                      position: "absolute",
+                      top: 20,
+                      right: 20,
+                      border: `1px solid ${item.color}`,
+                      color: item.color,
+                    }}>
+                    <ArrowForwardIosIcon fontSize='small' />
+                  </IconButton>
+                  <CardContent>
+                    <Typography
+                      variant='subtitle1'
+                      fontWeight='bold'
+                      color={"#A2BF00"}
+                      gutterBottom>
+                      {item.name}
+                    </Typography>
+                    <Typography variant='body2' color='text.secondary' mb={2}>
+                      {item.description}
+                    </Typography>
+                    <Stack spacing={2}>
+                      <Stat
+                        icon={PeopleAltIcon}
+                        text={item.subscribers}
+                        detail={"Người đăng ký"}
+                        color={"#FF5722"}
+                      />
+                      <Stat
+                        icon={VisibilityIcon}
+                        text={item.views}
+                        detail={"Người đăng ký"}
+                        color={"#FF5722"}
+                      />
+                      <Stat
+                        icon={VideoLibraryIcon}
+                        text={item.videos}
+                        detail={"Người đăng ký"}
+                        color={"#FF5722"}
+                      />
+                    </Stack>
+                    <Stack
+                      direction='row'
+                      spacing={2}
+                      justifyContent='start'
+                      mt={3}>
+                      <FacebookIcon sx={{ fontSize: 25, color: "#FF5722" }} />
+                      <YouTubeIcon sx={{ fontSize: 25, color: "#FF5722" }} />
+                      <RiTiktokFill
+                        style={{ fontSize: 24, color: "#FF5722" }}
+                      />
+                      <InstagramIcon sx={{ fontSize: 25, color: "#FF5722" }} />
+                    </Stack>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </Grid>
+          ))}
       </Grid>
     </Container>
   );
