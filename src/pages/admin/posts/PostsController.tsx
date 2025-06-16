@@ -163,7 +163,7 @@ const PostsController = () => {
       return showSnackbar("Title không được để trống", "error");
 
     }
-    const processedContent = await replaceBlobUrlsWithUploaded(content);
+    const processedContent = await processEditorImages(content);
     if (file) {
       const formData: any = new FormData();
       formData.append("image", file);
@@ -228,42 +228,35 @@ const PostsController = () => {
     let val = e.target.value;
     setForm({ ...form, [e.target.name]: val });
   };
-  const replaceBlobUrlsWithUploaded = async (htmlContent: string) => {
-    // Tạo một DOM ảo để phân tích HTML
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(htmlContent, 'text/html');
-    const images = doc.querySelectorAll('img[src^="blob:"]');
-
-    // Tạo mảng promises để upload ảnh
+  const processEditorImages = async (html: string) => {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const images = doc.querySelectorAll('img[src^="data:image/"]');
+  
     const uploadPromises = Array.from(images).map(async (img) => {
-      const blobUrl = img.getAttribute('src');
-      if (!blobUrl) return;
-
+      const src = img.getAttribute('src');
+      if (!src) return;
+  
       try {
-        // Lấy blob từ blob URL
-        const response = await fetch(blobUrl);
+        // Chuyển base64 thành blob
+        const response = await fetch(src);
         const blob = await response.blob();
-
-        // Tạo FormData và upload
+        
+        // Upload lên server
         const formData = new FormData();
-        formData.append('image', blob, 'editor-image.png');
-
-        const uploadResult = await uploadImage(formData);
-        if (uploadResult.url) {
-          // Thay thế blob URL bằng URL thật
-          img.setAttribute('src', uploadResult.url);
+        formData.append('image', blob, `img-${Date.now()}.png`);
+        
+        const result = await uploadImage(formData);
+        if (result.url) {
+          img.setAttribute('src', result.url);
         }
       } catch (error) {
-        console.error('Error uploading image:', error);
-        // Có thể giữ nguyên blob URL hoặc xử lý lỗi theo cách khác
+        console.error('Upload image failed:', error);
+        // Giữ nguyên base64 nếu upload thất bại
       }
     });
-
-    // Đợi tất cả ảnh upload xong
+  
     await Promise.all(uploadPromises);
-
-    // Trả về HTML đã được cập nhật
-    return doc.documentElement.innerHTML;
+    return doc.body.innerHTML;
   };
   return (
     <>
