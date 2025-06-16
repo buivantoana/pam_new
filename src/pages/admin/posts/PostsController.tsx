@@ -159,8 +159,11 @@ const PostsController = () => {
 
   const handleSave = async () => {
     setLoadingCreate(true);
-    if (!form.title.trim())
+    if (!form.title.trim()){
       return showSnackbar("Title không được để trống", "error");
+
+    }
+      const processedContent = await replaceBlobUrlsWithUploaded(content);
     if (file) {
       const formData: any = new FormData();
       formData.append("image", file);
@@ -169,7 +172,7 @@ const PostsController = () => {
       if (Object.keys(upload).length > 0) {
         let body = {
           ...form,
-          content: content,
+          content: processedContent,
           imageUrl: upload.url,
         };
         console.log("body", body);
@@ -187,7 +190,7 @@ const PostsController = () => {
         } else showSnackbar(res.message || "Lỗi", "error");
       }
     } else if (!file && editPost) {
-      const fn = updatePost(editPost._id, { ...form, content: content });
+      const fn = updatePost(editPost._id, { ...form, content: processedContent });
       const res = await fn;
       if (res.status === 0) {
         setContent("");
@@ -225,7 +228,43 @@ const PostsController = () => {
     let val = e.target.value;
     setForm({ ...form, [e.target.name]: val });
   };
-
+  const replaceBlobUrlsWithUploaded = async (htmlContent: string) => {
+    // Tạo một DOM ảo để phân tích HTML
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlContent, 'text/html');
+    const images = doc.querySelectorAll('img[src^="blob:"]');
+    
+    // Tạo mảng promises để upload ảnh
+    const uploadPromises = Array.from(images).map(async (img) => {
+      const blobUrl = img.getAttribute('src');
+      if (!blobUrl) return;
+      
+      try {
+        // Lấy blob từ blob URL
+        const response = await fetch(blobUrl);
+        const blob = await response.blob();
+        
+        // Tạo FormData và upload
+        const formData = new FormData();
+        formData.append('image', blob, 'editor-image.png');
+        
+        const uploadResult = await uploadImage(formData);
+        if (uploadResult.url) {
+          // Thay thế blob URL bằng URL thật
+          img.setAttribute('src', uploadResult.url);
+        }
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        // Có thể giữ nguyên blob URL hoặc xử lý lỗi theo cách khác
+      }
+    });
+    
+    // Đợi tất cả ảnh upload xong
+    await Promise.all(uploadPromises);
+    
+    // Trả về HTML đã được cập nhật
+    return doc.documentElement.innerHTML;
+  };
   return (
     <>
       {loadingCreate && <Loading />}
@@ -596,6 +635,14 @@ const PostsController = () => {
 
                         content_style:
                           "body { font-family:Helvetica,Arial,sans-serif; font-size:16px }",
+                        images_upload_handler: (blobInfo, progress) => new Promise((resolve) => {
+                          // Tạo blob URL tạm thời thay vì upload ngay
+                          const blobUrl = URL.createObjectURL(blobInfo.blob());
+                          resolve(blobUrl);
+                        }),
+                        // Thêm cấu hình để lưu blob URL thay vì base64
+                        images_reuse_filename: true,
+                        images_upload_base_path: '/temp',
                       }}
                     />
                   </Box>
