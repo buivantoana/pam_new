@@ -28,6 +28,10 @@ import {
   RiHome6Line,
   RiTeamLine,
   RiBuildingLine,
+  RiProductHuntFill,
+  RiHotelLine,
+  RiNewspaperLine,
+  RiListUnordered,
 } from "react-icons/ri";
 import {
   RiArticleLine,
@@ -124,6 +128,8 @@ const LayoutAdmin = () => {
     post: true,
     image: false,
     category: false,
+    product: false,
+    company: false,
   });
   const [openImageMenu, setOpenImageMenu] = useState(false);
   const [selectedItem, setSelectedItem] = useState("");
@@ -133,17 +139,53 @@ const LayoutAdmin = () => {
   const activeTab = params.get("tab");
   useEffect(() => {
     if (location.pathname && location.pathname == "/admin/post") {
-      setActive({ image: false, category: false, post: true });
+      setActive({
+        image: false,
+        category: false,
+        post: true,
+        product: false,
+        company: false,
+      });
     }
     if (location.pathname && location.pathname == "/admin/category") {
-      setActive({ image: false, category: true, post: false });
+      setActive({
+        image: false,
+        category: true,
+        post: false,
+        product: false,
+        company: false,
+      });
+    }
+    if (location.pathname && location.pathname == "/admin/product") {
+      setActive({
+        image: false,
+        category: false,
+        post: false,
+        product: true,
+        company: false,
+      });
+    }
+    if (location.pathname && location.pathname == "/admin/company") {
+      setActive({
+        image: false,
+        category: false,
+        post: false,
+        product: false,
+        company: true,
+      });
     }
     if (
       (location.pathname && location.pathname == "/admin/home-image") ||
       (location.pathname && location.pathname == "/admin/recruitment-image") ||
       (location.pathname && location.pathname == "/admin/cooperate-image")
     ) {
-      setActive({ image: true, category: false, post: false });
+      setActive({
+        image: true,
+        category: false,
+        post: false,
+        product: false,
+        company: false,
+      });
     }
   }, [params]);
   const handleDrawerOpen = () => {
@@ -302,7 +344,7 @@ const LayoutAdmin = () => {
                     <CustomListItemButton>
                       <ListItemIcon
                         sx={{ display: "flex", justifyContent: "center" }}>
-                        <RiLineChartFill color={"white"} />
+                        <RiNewspaperLine color={"white"} />
                       </ListItemIcon>
                       <ListItemText primary={"Bài viết"} />
                     </CustomListItemButton>
@@ -327,7 +369,7 @@ const LayoutAdmin = () => {
                     <CustomListItemButton>
                       <ListItemIcon
                         sx={{ display: "flex", justifyContent: "center" }}>
-                        <RiUser3Fill color={"white"} />
+                        <RiListUnordered color={"white"} />
                       </ListItemIcon>
                       <ListItemText primary={"Danh mục"} />
                     </CustomListItemButton>
@@ -343,18 +385,43 @@ const LayoutAdmin = () => {
                       width: "100%",
                       textDecoration: "none",
                     },
-                    background: active.category ? "#2e3650" : undefined,
-                    border: active.category ? "1px solid #4c5680" : "none",
-                    borderRadius: active.category ? "5px" : "none",
+                    background: active.product ? "#2e3650" : undefined,
+                    border: active.product ? "1px solid #4c5680" : "none",
+                    borderRadius: active.product ? "5px" : "none",
                   }}
                   disablePadding>
                   <Link to={"/admin/product"}>
                     <CustomListItemButton>
                       <ListItemIcon
                         sx={{ display: "flex", justifyContent: "center" }}>
-                        <RiUser3Fill color={"white"} />
+                        <RiProductHuntFill color={"white"} />
                       </ListItemIcon>
                       <ListItemText primary={"Sản phẩm"} />
+                    </CustomListItemButton>
+                  </Link>
+                </ListItem>
+              </List>
+              <Divider />
+              <List sx={{ px: "10px" }}>
+                <ListItem
+                  sx={{
+                    a: {
+                      color: "white",
+                      width: "100%",
+                      textDecoration: "none",
+                    },
+                    background: active.company ? "#2e3650" : undefined,
+                    border: active.company ? "1px solid #4c5680" : "none",
+                    borderRadius: active.company ? "5px" : "none",
+                  }}
+                  disablePadding>
+                  <Link to={"/admin/company"}>
+                    <CustomListItemButton>
+                      <ListItemIcon
+                        sx={{ display: "flex", justifyContent: "center" }}>
+                        <RiHotelLine color={"white"} />
+                      </ListItemIcon>
+                      <ListItemText primary={"Công ty"} />
                     </CustomListItemButton>
                   </Link>
                 </ListItem>
@@ -453,7 +520,7 @@ const LayoutAdmin = () => {
             </Box>
           </Drawer>
         </Box>
-        <Main sx={{ minHeight: "100vh" }} open={open}>
+        <Main sx={{ minHeight: "100vh", pt: 3 }} open={open}>
           <DrawerHeader />
           <Box>
             <Outlet />
