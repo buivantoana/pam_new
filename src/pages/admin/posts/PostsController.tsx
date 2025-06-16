@@ -159,11 +159,11 @@ const PostsController = () => {
 
   const handleSave = async () => {
     setLoadingCreate(true);
-    if (!form.title.trim()){
+    if (!form.title.trim()) {
       return showSnackbar("Title không được để trống", "error");
 
     }
-      const processedContent = await replaceBlobUrlsWithUploaded(content);
+    const processedContent = await replaceBlobUrlsWithUploaded(content);
     if (file) {
       const formData: any = new FormData();
       formData.append("image", file);
@@ -233,21 +233,21 @@ const PostsController = () => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(htmlContent, 'text/html');
     const images = doc.querySelectorAll('img[src^="blob:"]');
-    
+
     // Tạo mảng promises để upload ảnh
     const uploadPromises = Array.from(images).map(async (img) => {
       const blobUrl = img.getAttribute('src');
       if (!blobUrl) return;
-      
+
       try {
         // Lấy blob từ blob URL
         const response = await fetch(blobUrl);
         const blob = await response.blob();
-        
+
         // Tạo FormData và upload
         const formData = new FormData();
         formData.append('image', blob, 'editor-image.png');
-        
+
         const uploadResult = await uploadImage(formData);
         if (uploadResult.url) {
           // Thay thế blob URL bằng URL thật
@@ -258,10 +258,10 @@ const PostsController = () => {
         // Có thể giữ nguyên blob URL hoặc xử lý lỗi theo cách khác
       }
     });
-    
+
     // Đợi tất cả ảnh upload xong
     await Promise.all(uploadPromises);
-    
+
     // Trả về HTML đã được cập nhật
     return doc.documentElement.innerHTML;
   };
@@ -635,14 +635,16 @@ const PostsController = () => {
 
                         content_style:
                           "body { font-family:Helvetica,Arial,sans-serif; font-size:16px }",
-                        images_upload_handler: (blobInfo, progress) => new Promise((resolve) => {
-                          // Tạo blob URL tạm thời thay vì upload ngay
-                          const blobUrl = URL.createObjectURL(blobInfo.blob());
-                          resolve(blobUrl);
+                        images_upload_handler: (blobInfo) => new Promise((resolve) => {
+                          // Tạo URL tạm thời với chất lượng tốt hơn
+                          const reader = new FileReader();
+                          reader.onload = () => {
+                            resolve(reader.result as string);
+                          };
+                          reader.readAsDataURL(blobInfo.blob());
                         }),
-                        // Thêm cấu hình để lưu blob URL thay vì base64
-                        images_reuse_filename: true,
-                        images_upload_base_path: '/temp',
+                        images_reuse_filename: false, // Tắt để tránh xung đột
+                        images_upload_base_path: '',
                       }}
                     />
                   </Box>
