@@ -210,7 +210,7 @@ const Header = () => {
                 <Typography variant='body1' fontWeight={500}>
                   Hệ thống sản phẩm
                 </Typography>
-                <ExpandMoreIcon fontSize='small' />
+                {/* <ExpandMoreIcon fontSize='small' /> */}
               </Box>
               <Typography
                 variant='body1'
