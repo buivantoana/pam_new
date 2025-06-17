@@ -207,7 +207,7 @@ const Header = () => {
                 // onClick={handleChannelClick}
                 onClick={()=>navigate("/chanel")}
                 >
-                <Typography variant='body1' fontWeight={500}>
+                <Typography variant='body1' fontWeight={currentPath === "/chanel" ? 700:500}>
                   Hệ thống sản phẩm
                 </Typography>
                 {/* <ExpandMoreIcon fontSize='small' /> */}
