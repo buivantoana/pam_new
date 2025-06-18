@@ -22,7 +22,7 @@ import vector2 from "../../images/Vector-left3.png";
 import icon_right from "../../images/icon-right.png";
 import icon_right1 from "../../images/icon-right2.png";
 import vector3 from "../../images/Vectorright.png";
-import bg from "../../images/Mask group.png";
+import bg from "../../images/Mask group 1.png";
 import { useNavigate } from "react-router-dom";
 
 const fadeIn = {
