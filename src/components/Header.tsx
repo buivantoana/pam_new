@@ -204,11 +204,13 @@ const Header = () => {
                   color: currentPath === "/chanel" ? "#f26522" : "inherit",
                   fontWeight: currentPath === "/chanel" ? "700" : "500",
                 }}
-                onClick={handleChannelClick}>
-                <Typography variant='body1' fontWeight={500}>
+                // onClick={handleChannelClick}
+                onClick={()=>navigate("/chanel")}
+                >
+                <Typography variant='body1' fontWeight={currentPath === "/chanel" ? 700:500}>
                   Hệ thống sản phẩm
                 </Typography>
-                <ExpandMoreIcon fontSize='small' />
+                {/* <ExpandMoreIcon fontSize='small' /> */}
               </Box>
               <Typography
                 variant='body1'
