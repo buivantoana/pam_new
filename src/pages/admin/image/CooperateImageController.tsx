@@ -399,7 +399,7 @@ const CooperateImageController = () => {
 
           <Typography variant={isMobile ? "h6" : "h3"} fontWeight='500' mb={4}>
             Khán giả chính của{" "}
-            <span style={{ color: "#f2784b", fontStyle: "italic" }}>
+            <span style={{ color: "#f2784b", fontStyle: "italic" ,fontFamily: `"Inter", sans-serif` }}>
               Pam-Media
             </span>
             <span style={{ color: "#f2784b" }}>✨</span>
@@ -492,7 +492,7 @@ const CooperateImageController = () => {
               mt={4}
               mb={4}>
               Nội dung hàng đầu
-              <span style={{ color: "#f2784b", fontStyle: "italic" }}>
+              <span style={{ color: "#f2784b", fontStyle: "italic",fontFamily: `"Inter", sans-serif` }}>
                 Pam-Media
               </span>
               <span style={{ color: "#f2784b" }}>✨</span>

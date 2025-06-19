@@ -151,6 +151,7 @@ const ChannelSlider = ({ slideImages, setSlideImages, defaultUrls = [] }) => {
           component='span'
           fontWeight={600}
           fontStyle='italic'
+          sx={{fontFamily: `"Inter", sans-serif`}}
           color='#f26522'>
           Pam-Media
         </Box>
@@ -598,7 +599,7 @@ const HomeController = () => {
           Đối tác kênh của{" "}
           <Box
             component='span'
-            sx={{}}
+            sx={{fontFamily: `"Inter", sans-serif`}}
             fontWeight={600}
             fontStyle='italic'
             color='#A2BF00'>
