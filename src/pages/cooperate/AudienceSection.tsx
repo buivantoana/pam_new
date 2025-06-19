@@ -101,7 +101,7 @@ const AudienceSection = ({ image }) => {
         fontWeight='500'
         mb={4}>
         Khán giả chính của{" "}
-        <span style={{ color: "#f2784b", fontStyle: "italic" }}>Pam-Media</span>
+        <span style={{ color: "#f2784b", fontFamily: `"Inter", sans-serif`,fontWeight:700 }}>Pam-Media</span>
         <span style={{ color: "#f2784b" }}>✨</span>
       </Typography>
 

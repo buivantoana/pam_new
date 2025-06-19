@@ -31,11 +31,11 @@ const PartnersSection = ({ image }) => {
         Đối tác kênh của{" "}
         <Box
           component='span'
-          sx={{}}
-          fontWeight={600}
-          fontStyle='italic'
+          sx={{fontFamily: `"Inter", sans-serif`}}
+          fontWeight={700}
+         
           color='#A2BF00'>
-          Pam-Media
+          Pam Media
         </Box>
       </Typography>
 

@@ -468,7 +468,7 @@ const LayoutAdmin = () => {
                       sx={{ display: "flex", justifyContent: "center" }}>
                       <RiImageEditFill color={"white"} />
                     </ListItemIcon>
-                    <ListItemText primary={"Quản lý ảnh"} />
+                    <ListItemText primary={"Quản lý nội dung"} />
                   </CustomListItemButton>
                 </ListItem>
 
@@ -482,7 +482,7 @@ const LayoutAdmin = () => {
                           <ListItemIcon>
                             <RiHome6Line color='white' />
                           </ListItemIcon>
-                          <ListItemText primary='Ảnh trang chủ' />
+                          <ListItemText primary='Trang chủ' />
                         </CustomListItemButton>
                       </Link>
                     </ListItem>
@@ -495,7 +495,7 @@ const LayoutAdmin = () => {
                           <ListItemIcon>
                             <RiTeamLine color='white' />
                           </ListItemIcon>
-                          <ListItemText primary='Ảnh tuyển dụng' />
+                          <ListItemText primary='Tuyển dụng' />
                         </CustomListItemButton>
                       </Link>
                     </ListItem>
@@ -508,7 +508,7 @@ const LayoutAdmin = () => {
                           <ListItemIcon>
                             <RiBuildingLine color='white' />
                           </ListItemIcon>
-                          <ListItemText primary='Ảnh hợp tác' />
+                          <ListItemText primary='Hợp tác' />
                         </CustomListItemButton>
                       </Link>
                     </ListItem>

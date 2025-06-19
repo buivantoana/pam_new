@@ -105,10 +105,11 @@ const PartnersSection = () => {
         Đối tác kênh của{" "}
         <Box
           component='span'
-          fontWeight={600}
-          fontStyle='italic'
+          fontWeight={700}
+          
+          sx={{fontFamily: `"Inter", sans-serif`}}
           color='#A2BF00'>
-          Pam-Media
+          Pam Media
         </Box>
       </Typography>
 

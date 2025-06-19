@@ -120,9 +120,10 @@ const AboutSection = ({ image }) => {
                     <Typography
                       fontSize={isMobile ? "35px" : "64px"}
                       fontWeight={"bold"}
-                      fontStyle={"italic"}
+                     
+                      sx={{ fontFamily: `"Inter", sans-serif`}}
                       color='rgba(255, 97, 25, 1)'>
-                      Pam-Media
+                      Pam Media
                     </Typography>
                   </Typography>
                 </Box>
@@ -215,9 +216,9 @@ const AboutSection = ({ image }) => {
                       variant='span'
                       fontSize={isMobile ? "35px" : "64px"}
                       fontWeight={"bold"}
-                      fontStyle={"italic"}
+                      sx={{ fontFamily: `"Inter", sans-serif`}}
                       color='rgba(162, 191, 0, 1)'>
-                      Pam-Media
+                      Pam Media
                     </Typography>
                   </Typography>
                 </Box>

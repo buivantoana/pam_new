@@ -59,11 +59,11 @@ const ChannelSlider = ({ image }) => {
           Hệ thống Sản phẩm {" "}
           <Box
             component='span'
-            sx={{}}
-            fontWeight={600}
-            fontStyle='italic'
+            sx={{fontFamily: `"Inter", sans-serif`,}}
+            fontWeight={700}
+            
             color='#f26522'>
-            Pam-Media
+            Pam Media
           </Box>
         </Typography>
       </motion.div>

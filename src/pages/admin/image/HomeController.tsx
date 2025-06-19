@@ -146,7 +146,7 @@ const ChannelSlider = ({ slideImages, setSlideImages, defaultUrls = [] }) => {
         variant={isMobile ? "h5" : "h3"}
         fontWeight={500}
         mb={4}>
-        Hệ thống kênh của{" "}
+        Hệ thống Sản phẩm{" "}
         <Box
           component='span'
           fontWeight={600}
@@ -296,10 +296,10 @@ const HomeController = () => {
   const [bannerLeftBottom, setBannerLeftBottom] = useState(null);
   const [bannerRightTop, setBannerRightTop] = useState(null);
   const [bannerRightBottom, setBannerRightBottom] = useState(null);
-  const [title1, setTitle1] = useState("PAM MEDIA");
-  const [title2, setTitle2] = useState("Passion Awakens <br /> Miracles");
+  const [title1, setTitle1] = useState("");
+  const [title2, setTitle2] = useState("");
   const [description, setDescription] = useState(
-    "Văn hóa biết ơn không chỉ nằm ở lời nói, mà thể hiện qua cách PAM xây dựng một môi trường làm việc tử tế, tích cực và gắn kết."
+    ""
   );
   const [name, setName] = useState(null);
   const [slideImages, setSlideImages] = useState({});

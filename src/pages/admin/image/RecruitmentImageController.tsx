@@ -7,6 +7,7 @@ import {
   useTheme,
   Grid,
   Container,
+  TextField,
 } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -164,7 +165,7 @@ const ChannelSlider = ({ slideImages, setSlideImages, defaultUrls = [] }) => {
   };
 
   return (
-    <Box py={6} px={2} sx={{}}>
+    <Box py={2} px={2} sx={{}}>
       <Slider {...sliderSettings}>
         {[...Array(5)].map((_, index) => (
           <Box key={index} px={2}>
@@ -193,6 +194,10 @@ const RecruitmentImageController = (props: Props) => {
   const [slideImages, setSlideImages] = useState({});
   const [name, setName] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [title2, setTitle2] = useState("");
+  const [description, setDescription] = useState(
+    ""
+  );
   // Load dữ liệu ban đầu
   useEffect(() => {
     getImage();
@@ -207,6 +212,10 @@ const RecruitmentImageController = (props: Props) => {
           setRightImage(result.data.recruitment.rightImage1);
         if (result.data.recruitment?.leftImage2)
           setLeftImage(result.data.recruitment.leftImage2);
+        if (result.data.recruitment?.title2)
+          setTitle2(result.data.recruitment.title2);
+        if (result.data.recruitment?.description)
+          setDescription(result.data.recruitment.description);
 
         const mappedSlides: any = {};
         result.data.channelSliderImages?.forEach((url, index) => {
@@ -243,7 +252,8 @@ const RecruitmentImageController = (props: Props) => {
       } else {
         homeBanner.leftImage2 = leftImage; // giữ nguyên
       }
-
+      homeBanner.title2 = title2;
+      homeBanner.description = description;
       // Upload ảnh slide
       // Upload ảnh slide
       for (let i = 0; i < 5; i++) {
@@ -375,7 +385,28 @@ const RecruitmentImageController = (props: Props) => {
 
           {/* ChannelSlider Section */}
           <Container maxWidth='lg'>
-            <Box py={6}>
+          <Box sx={{ position: "relative", zIndex: 5 }}>
+              <TextField
+                fullWidth
+                label='Title'
+                value={title2}
+                onChange={(e) => setTitle2(e.target.value)}
+                sx={{ mx: "auto", mt: 2,mb:1,bgcolor:"white" }}
+              />
+            </Box>
+
+            <Box sx={{ position: "relative", zIndex: 5 }}>
+              <TextField
+                fullWidth
+                label='Description'
+                multiline
+                rows={4}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                sx={{ mx: "auto", mb: 2,bgcolor:"white" }}
+              />
+            </Box>
+            <Box >
               <ChannelSlider
                 slideImages={slideImages}
                 setSlideImages={setSlideImages}
@@ -384,6 +415,7 @@ const RecruitmentImageController = (props: Props) => {
                 }
               />
             </Box>
+            
           </Container>
 
           {/* Button */}

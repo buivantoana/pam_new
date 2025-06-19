@@ -100,11 +100,11 @@ const AboutSection = ({ image }) => {
                     fontSize={isMobile ? "35px" : "64px"}>
                     Về Chúng tôi <br />{" "}
                     <Typography
-                      fontSize={isMobile ? "35px" : "64px"}
+                      fontSize={isMobile ? "35px" : "60px"}
                       fontWeight={"bold"}
-                      fontStyle={"italic"}
+                      sx={{fontFamily: `"Inter", sans-serif`,}}
                       color='rgba(255, 97, 25, 1)'>
-                      Pam-Media
+                      Pam Media
                     </Typography>
                   </Typography>
                 </Box>

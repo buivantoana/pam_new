@@ -126,12 +126,35 @@ const Banner = ({ image }) => {
         variants={fadeIn("right", 0.5)}
       />
 
-      {/* Title */}
-      <motion.div
+    
+      { image?.recruitment?.title2  ? <motion.div
         initial='hidden'
         whileInView='visible'
         viewport={{ once: true }}
         variants={fadeIn("up", 0.3)}>
+          
+        <Typography
+          variant='h2'
+          sx={{ fontSize: isMobile ? "26px" : "65px" }}
+          fontWeight={700}
+          mt={1}>
+          { image?.recruitment?.title2}
+          <span
+            style={{
+              fontWeight: "700",
+              color: "#f26522",
+              fontSize: isMobile ? "26px" : "65px",
+              fontFamily: `"Inter", sans-serif`
+            }}>
+            Pam Media
+          </span>
+        </Typography>
+      </motion.div>: <motion.div
+        initial='hidden'
+        whileInView='visible'
+        viewport={{ once: true }}
+        variants={fadeIn("up", 0.3)}>
+          
         <Typography
           variant='h2'
           sx={{ fontSize: isMobile ? "26px" : "65px" }}
@@ -143,12 +166,12 @@ const Banner = ({ image }) => {
               fontWeight: "700",
               color: "#f26522",
               fontSize: isMobile ? "26px" : "65px",
-              fontStyle: "italic",
+              fontFamily: `"Inter", sans-serif`
             }}>
-            Pam-Media
+            Pam Media
           </span>
         </Typography>
-      </motion.div>
+      </motion.div>}
 
       {/* Subtext */}
       <motion.div
@@ -161,8 +184,8 @@ const Banner = ({ image }) => {
           my={2}
           mx='auto'
           fontSize={isMobile ? "12px" : "inherit"}>
-          Văn hóa biết ơn không chỉ nằm ở lời nói, mà thể hiện qua cách PAM xây
-          dựng một môi trường làm việc tử tế, tích cực và gắn kết.
+          { image?.recruitment?.description?image?.recruitment?.description:`Văn hóa biết ơn không chỉ nằm ở lời nói, mà thể hiện qua cách PAM xây
+          dựng một môi trường làm việc tử tế, tích cực và gắn kết.`}
         </Typography>
       </motion.div>
 

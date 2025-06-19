@@ -140,11 +140,11 @@ const Banner = ({ image }) => {
         custom={0}>
         <Typography
           variant='h1'
-          fontWeight={700}
+          fontWeight={900}
           sx={{
             color: "#f26522",
-            fontSize: isMobile ? "26px" : "65px",
-            // fontFamily: `"Courgette", cursive`,
+            fontSize: isMobile ? "26px" : "70px",
+            fontFamily: `"Inter", sans-serif`,
           }}>
           PAM MEDIA
         </Typography>
