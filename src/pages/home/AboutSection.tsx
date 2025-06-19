@@ -95,6 +95,19 @@ const AboutSection = ({ image }) => {
                 viewport={{ once: true }}>
                 <Box mb={2}>
                   {/* <img src={AboutImage4} width={"100%"} /> */}
+                  { image && image?.homeBanner?.title3 ?<Typography
+                    fontWeight={"bold"}
+                    fontSize={isMobile ? "35px" : "64px"}>
+                    { image?.homeBanner?.title3}
+                    <Typography
+                      fontSize={isMobile ? "35px" : "60px"}
+                      fontWeight={"bold"}
+                      sx={{fontFamily: `"Inter", sans-serif`,}}
+                      color='rgba(255, 97, 25, 1)'>
+                      Pam Media
+                    </Typography>
+                  </Typography> :
+                     
                   <Typography
                     fontWeight={"bold"}
                     fontSize={isMobile ? "35px" : "64px"}>
@@ -106,12 +119,12 @@ const AboutSection = ({ image }) => {
                       color='rgba(255, 97, 25, 1)'>
                       Pam Media
                     </Typography>
-                  </Typography>
+                  </Typography>}
                 </Box>
                 <Typography color='textSecondary' mb={3}>
-                  Lorem ipsum is simply dummy text of the printing and
+                  {image && image?.homeBanner?.description2 ?image && image?.homeBanner?.description2 :`Lorem ipsum is simply dummy text of the printing and
                   typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text.
+                  standard dummy text.`}
                 </Typography>
                 <Button
                   variant='outlined'
@@ -187,6 +200,19 @@ const AboutSection = ({ image }) => {
                 viewport={{ once: true }}>
                 <Box mb={2}>
                   {/* <img src={AboutImage3} width={"100%"} /> */}
+                  { image && image?.homeBanner?.title4 ?<Typography
+                    fontWeight={"bold"}
+                    fontSize={isMobile ? "35px" : "64px"}>
+                    {image && image?.homeBanner?.title4}
+                    <Typography
+                      variant='span'
+                      fontSize={isMobile ? "35px" : "64px"}
+                      fontWeight={"bold"}
+                      fontStyle={"italic"}
+                      color='rgba(162, 191, 0, 1)'>
+                      kỷ nguyên số
+                    </Typography>
+                  </Typography>:
                   <Typography
                     fontWeight={"bold"}
                     fontSize={isMobile ? "35px" : "64px"}>
@@ -199,12 +225,12 @@ const AboutSection = ({ image }) => {
                       color='rgba(162, 191, 0, 1)'>
                       kỷ nguyên số
                     </Typography>
-                  </Typography>
+                  </Typography>}
                 </Box>
                 <Typography color='textSecondary' mb={3}>
-                  Lorem ipsum is simply dummy text of the printing and
+                {image && image?.homeBanner?.description3 ?image && image?.homeBanner?.description3 :`Lorem ipsum is simply dummy text of the printing and
                   typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text.
+                  standard dummy text.`}
                 </Typography>
                 <Button
                   variant='outlined'

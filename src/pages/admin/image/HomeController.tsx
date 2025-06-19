@@ -151,7 +151,7 @@ const ChannelSlider = ({ slideImages, setSlideImages, defaultUrls = [] }) => {
           component='span'
           fontWeight={600}
           fontStyle='italic'
-          sx={{fontFamily: `"Inter", sans-serif`}}
+          sx={{ fontFamily: `"Inter", sans-serif` }}
           color='#f26522'>
           Pam-Media
         </Box>
@@ -299,7 +299,16 @@ const HomeController = () => {
   const [bannerRightBottom, setBannerRightBottom] = useState(null);
   const [title1, setTitle1] = useState("");
   const [title2, setTitle2] = useState("");
+  const [title3, setTitle3] = useState("");
+  const [title4, setTitle4] = useState("");
   const [description, setDescription] = useState(
+    ""
+  );
+
+  const [description2, setDescription2] = useState(
+    ""
+  );
+  const [description3, setDescription3] = useState(
     ""
   );
   const [name, setName] = useState(null);
@@ -334,8 +343,16 @@ const HomeController = () => {
           setTitle1(result.data.homeBanner.title1);
         if (result.data.homeBanner?.title2)
           setTitle2(result.data.homeBanner.title2);
+          if (result.data.homeBanner?.title3)
+          setTitle3(result.data.homeBanner.title3);
+          if (result.data.homeBanner?.title4)
+          setTitle4(result.data.homeBanner.title4);
         if (result.data.homeBanner?.description)
           setDescription(result.data.homeBanner.description);
+          if (result.data.homeBanner?.description2)
+          setDescription2(result.data.homeBanner.description2);
+          if (result.data.homeBanner?.description3)
+          setDescription3(result.data.homeBanner.description3);
 
         const mappedSlides: any = {};
         result.data.channelSliderImages?.forEach((url, index) => {
@@ -421,7 +438,11 @@ const HomeController = () => {
 
       // Add text fields to homeBanner
       homeBanner.title2 = title2;
+      homeBanner.title3 = title3;
+      homeBanner.title4 = title4;
       homeBanner.description = description;
+      homeBanner.description2 = description2;
+      homeBanner.description3 = description3;
 
       // Upload slide images
       for (let i = 0; i < 5; i++) {
@@ -504,13 +525,27 @@ const HomeController = () => {
             <Box py={isMobile ? 2 : 8}>
               <Grid container spacing={isMobile ? 6 : 5} alignItems='center'>
                 <Grid item xs={12} md={6}>
-                  <Box mb={2} width='60%'>
-                    <img src={AboutImage3} width='100%' />
+                  <Box sx={{ position: "relative", zIndex: 2 }}>
+                    <TextField
+                      fullWidth
+                      label='Title'
+                      value={title3}
+                      onChange={(e) => setTitle3(e.target.value)}
+                      sx={{ mx: "auto", mb: 2 }}
+                    />
                   </Box>
-                  <Typography color='textSecondary' mb={3}>
-                    Lorem ipsum is simply dummy text of the printing and
-                    typesetting industry.
-                  </Typography>
+
+                  <Box sx={{ position: "relative", zIndex: 2 }}>
+                    <TextField
+                      fullWidth
+                      label='Description'
+                      multiline
+                      rows={4}
+                      value={description2}
+                      onChange={(e) => setDescription2(e.target.value)}
+                      sx={{ mx: "auto", mb: 2 }}
+                    />
+                  </Box>
                   <Button
                     variant='outlined'
                     sx={{
@@ -554,13 +589,27 @@ const HomeController = () => {
                 </Grid>
 
                 <Grid item xs={12} md={6} order={{ xs: 2, md: 3 }}>
-                  <Box mb={2} width='60%'>
-                    <img src={AboutImage4} width='100%' />
+                  <Box sx={{ position: "relative", zIndex: 2 }}>
+                    <TextField
+                      fullWidth
+                      label='Title'
+                      value={title4}
+                      onChange={(e) => setTitle4(e.target.value)}
+                      sx={{ mx: "auto", mb: 2 }}
+                    />
                   </Box>
-                  <Typography color='textSecondary' mb={3}>
-                    Lorem ipsum is simply dummy text of the printing and
-                    typesetting industry.
-                  </Typography>
+
+                  <Box sx={{ position: "relative", zIndex: 2 }}>
+                    <TextField
+                      fullWidth
+                      label='Description'
+                      multiline
+                      rows={4}
+                      value={description3}
+                      onChange={(e) => setDescription3(e.target.value)}
+                      sx={{ mx: "auto", mb: 2 }}
+                    />
+                  </Box>
                   <Button
                     variant='outlined'
                     sx={{
@@ -599,7 +648,7 @@ const HomeController = () => {
           Đối tác kênh của{" "}
           <Box
             component='span'
-            sx={{fontFamily: `"Inter", sans-serif`}}
+            sx={{ fontFamily: `"Inter", sans-serif` }}
             fontWeight={600}
             fontStyle='italic'
             color='#A2BF00'>

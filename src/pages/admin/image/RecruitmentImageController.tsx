@@ -198,6 +198,15 @@ const RecruitmentImageController = (props: Props) => {
   const [description, setDescription] = useState(
     ""
   );
+  const [title3, setTitle3] = useState("");
+  const [title4, setTitle4] = useState("");
+
+  const [description2, setDescription2] = useState(
+    ""
+  );
+  const [description3, setDescription3] = useState(
+    ""
+  );
   // Load dữ liệu ban đầu
   useEffect(() => {
     getImage();
@@ -214,8 +223,16 @@ const RecruitmentImageController = (props: Props) => {
           setLeftImage(result.data.recruitment.leftImage2);
         if (result.data.recruitment?.title2)
           setTitle2(result.data.recruitment.title2);
+          if (result.data.recruitment?.title3)
+          setTitle3(result.data.recruitment.title3);
+          if (result.data.recruitment?.title4)
+          setTitle4(result.data.recruitment.title4);
         if (result.data.recruitment?.description)
           setDescription(result.data.recruitment.description);
+          if (result.data.recruitment?.description2)
+          setDescription2(result.data.recruitment.description2);
+          if (result.data.recruitment?.description3)
+          setDescription3(result.data.recruitment.description3);
 
         const mappedSlides: any = {};
         result.data.channelSliderImages?.forEach((url, index) => {
@@ -253,9 +270,12 @@ const RecruitmentImageController = (props: Props) => {
         homeBanner.leftImage2 = leftImage; // giữ nguyên
       }
       homeBanner.title2 = title2;
+      homeBanner.title3 = title3;
+      homeBanner.title4 = title4;
       homeBanner.description = description;
-      // Upload ảnh slide
-      // Upload ảnh slide
+      homeBanner.description2 = description2;
+      homeBanner.description3 = description3;
+
       for (let i = 0; i < 5; i++) {
         const slide = slideImages[i];
 
@@ -493,14 +513,27 @@ const RecruitmentImageController = (props: Props) => {
             <Box py={isMobile ? 2 : 8} sx={{ position: "relative" }}>
               <Grid container spacing={isMobile ? 6 : 5} alignItems='center'>
                 <Grid item xs={12} md={6}>
-                  <Box mb={2} width={"60%"}>
-                    <img src={AboutImage4} width='100%' />
+                <Box sx={{ position: "relative", zIndex: 2 }}>
+                    <TextField
+                      fullWidth
+                      label='Title'
+                      value={title3}
+                      onChange={(e) => setTitle3(e.target.value)}
+                      sx={{ mx: "auto", mb: 2 }}
+                    />
                   </Box>
-                  <Typography color='textSecondary' mb={3}>
-                    Lorem ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text.
-                  </Typography>
+
+                  <Box sx={{ position: "relative", zIndex: 2 }}>
+                    <TextField
+                      fullWidth
+                      label='Description'
+                      multiline
+                      rows={4}
+                      value={description2}
+                      onChange={(e) => setDescription2(e.target.value)}
+                      sx={{ mx: "auto", mb: 2 }}
+                    />
+                  </Box>
                   <Button
                     variant='outlined'
                     sx={{
@@ -544,24 +577,26 @@ const RecruitmentImageController = (props: Props) => {
                 </Grid>
 
                 <Grid item xs={12} md={6} order={{ xs: 2, md: 3 }}>
-                  <Box mb={2} width={"60%"}>
-                    <img src={AboutImage3} width='100%' />
+                <Box sx={{ position: "relative", zIndex: 2 }}>
+                    <TextField
+                      fullWidth
+                      label='Title'
+                      value={title4}
+                      onChange={(e) => setTitle4(e.target.value)}
+                      sx={{ mx: "auto", mb: 2 }}
+                    />
                   </Box>
-                  <Box display={"flex"} flexDirection={"column"} mb={3} gap={2}>
-                    {[
-                      "Thu nhập cao theo năng lực",
-                      "Môi trường làm việc Gen z năng động",
-                      "Cơ hội thăng tiến trong công việc",
-                    ].map((text, i) => (
-                      <Typography
-                        key={i}
-                        display={"flex"}
-                        alignItems={"center"}
-                        gap={1}>
-                        <RiCheckFill color='rgba(255, 97, 25, 1)' />
-                        <Typography>{text}</Typography>
-                      </Typography>
-                    ))}
+
+                  <Box sx={{ position: "relative", zIndex: 2 }}>
+                    <TextField
+                      fullWidth
+                      label='Description'
+                      multiline
+                      rows={4}
+                      value={description3}
+                      onChange={(e) => setDescription3(e.target.value)}
+                      sx={{ mx: "auto", mb: 2 }}
+                    />
                   </Box>
                   <Button
                     variant='outlined'

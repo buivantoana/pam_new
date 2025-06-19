@@ -113,6 +113,19 @@ const AboutSection = ({ image }) => {
                 variants={fadeIn("up", 0.2)}>
                 <Box mb={2}>
                   {/* <img src={AboutImage4} width='100%' /> */}
+                  { image && image?.recruitment?.title3 ?<Typography
+                    fontWeight={"bold"}
+                    fontSize={isMobile ? "35px" : "64px"}>
+                   {image && image?.recruitment?.title3}
+                    <Typography
+                      fontSize={isMobile ? "35px" : "64px"}
+                      fontWeight={"bold"}
+                     
+                      sx={{ fontFamily: `"Inter", sans-serif`}}
+                      color='rgba(255, 97, 25, 1)'>
+                      Pam Media
+                    </Typography>
+                  </Typography> :
                   <Typography
                     fontWeight={"bold"}
                     fontSize={isMobile ? "35px" : "64px"}>
@@ -125,12 +138,12 @@ const AboutSection = ({ image }) => {
                       color='rgba(255, 97, 25, 1)'>
                       Pam Media
                     </Typography>
-                  </Typography>
+                  </Typography>}
                 </Box>
                 <Typography color='textSecondary' mb={3}>
-                  Lorem ipsum is simply dummy text of the printing and
+                {image && image?.recruitment?.description2 ?image && image?.recruitment?.description2 :`Lorem ipsum is simply dummy text of the printing and
                   typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text.
+                  standard dummy text.`}
                 </Typography>
                 <Button
                   variant='outlined'
@@ -207,7 +220,20 @@ const AboutSection = ({ image }) => {
                 variants={fadeIn("up", 0.5)}>
                 <Box mb={2}>
                   {/* <img src={AboutImage3} width='100%' /> */}
-                  <Typography
+                  { image && image?.recruitment?.title4 ? <Typography
+                    fontWeight={"bold"}
+                    fontSize={isMobile ? "35px" : "64px"}>
+                   { image && image?.recruitment?.title4}
+                    <br /> tại{" "}
+                    <Typography
+                      variant='span'
+                      fontSize={isMobile ? "35px" : "64px"}
+                      fontWeight={"bold"}
+                      sx={{ fontFamily: `"Inter", sans-serif`}}
+                      color='rgba(162, 191, 0, 1)'>
+                      Pam Media
+                    </Typography>
+                  </Typography> : <Typography
                     fontWeight={"bold"}
                     fontSize={isMobile ? "35px" : "64px"}>
                     Ưu điểm làm việc
@@ -220,23 +246,29 @@ const AboutSection = ({ image }) => {
                       color='rgba(162, 191, 0, 1)'>
                       Pam Media
                     </Typography>
-                  </Typography>
+                  </Typography>}
                 </Box>
                 <Box display={"flex"} flexDirection={"column"} mb={3} gap={2}>
-                  {[
-                    "Thu nhập cao theo năng lực",
-                    "Môi trường làm việc Gen z năng động",
-                    "Cơ hội thăng tiến trong công việc",
-                  ].map((text, i) => (
-                    <Typography
-                      key={i}
-                      display={"flex"}
-                      alignItems={"center"}
-                      gap={1}>
-                      <RiCheckFill color='rgba(255, 97, 25, 1)' />
-                      <Typography>{text}</Typography>
-                    </Typography>
-                  ))}
+                {image && image?.recruitment?.description3 ?image && <Typography color='textSecondary' mb={3}>
+                  { image?.recruitment?.description3}
+                </Typography> :
+                <>
+                {[ "Thu nhập cao theo năng lực",
+                "Môi trường làm việc Gen z năng động",
+                "Cơ hội thăng tiến trong công việc",
+              ].map((text, i) => (
+                <Typography
+                  key={i}
+                  display={"flex"}
+                  alignItems={"center"}
+                  gap={1}>
+                  <RiCheckFill color='rgba(255, 97, 25, 1)' />
+                  <Typography>{text}</Typography>
+                </Typography>
+              ))}
+                
+                </>}
+                 
                 </Box>
                 <Button
                   variant='outlined'
