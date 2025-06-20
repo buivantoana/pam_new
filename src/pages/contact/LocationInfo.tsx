@@ -12,7 +12,7 @@ import {
   Button
 } from '@mui/material';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import GoogleMapReact from "google-map-react";
+
 
 const containerStyle = {
   width: '100%',
@@ -22,8 +22,8 @@ const containerStyle = {
 };
 
 const center = {
-  lat: 21.007,  // Approximate coordinates for Tây Hà Tower
-  lng: 105.794  // Update these with exact coordinates
+  lat: 20.99652434416697, // Approximate coordinates for Tây Hà Tower
+  lng: 105.79306178336081,  // Update these with exact coordinates
 };
 
 const LocationInfo = () => {
