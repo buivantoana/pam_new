@@ -74,13 +74,13 @@ const Footer = () => {
           {/* Menu giữa */}
           <Grid item xs={6} md={4}>
             <Box display='flex' flexDirection='column' gap={1}>
-              <Link href='#' underline='none' color='textPrimary'>
+              <Link href='/' underline='none' color='textPrimary'>
                 Về chúng tôi
               </Link>
-              <Link href='#' underline='none' color='textPrimary'>
-                Kênh
+              <Link href='/product' underline='none' color='textPrimary'>
+                Sản phẩm
               </Link>
-              <Link href='#' underline='none' color='textPrimary'>
+              <Link href='cooperate' underline='none' color='textPrimary'>
                 Hợp tác
               </Link>
             </Box>
@@ -89,10 +89,10 @@ const Footer = () => {
           {/* Menu phải */}
           <Grid item xs={6} md={4}>
             <Box display='flex' flexDirection='column' gap={1}>
-              <Link href='#' underline='none' color='textPrimary'>
+              <Link href='/recruitment' underline='none' color='textPrimary'>
                 Tuyển dụng
               </Link>
-              <Link href='#' underline='none' color='textPrimary'>
+              <Link href='/news' underline='none' color='textPrimary'>
                 Tin tức
               </Link>
             </Box>
