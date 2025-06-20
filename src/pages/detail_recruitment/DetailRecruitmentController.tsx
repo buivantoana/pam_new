@@ -29,7 +29,7 @@ const DetailRecruitmentController = (props: Props) => {
     setLoading(false);
  };
   return (
-    <DetailRecruitmentView postDetail={postDetail} />
+    <DetailRecruitmentView id={id} postDetail={postDetail} />
   )
 }
 

@@ -19,7 +19,7 @@ import JobApplicationForm from "./JobApplicationForm";
 
 type Props = {};
 
-const DetailRecruitmentView = ({postDetail}: any) => {
+const DetailRecruitmentView = ({postDetail,id}: any) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
@@ -113,7 +113,7 @@ const DetailRecruitmentView = ({postDetail}: any) => {
         </Box>
       </Container>
       <JobApplicationForm  />
-      <IPCardSection />
+      <IPCardSection id={id} />
     </Box>
   );
 };

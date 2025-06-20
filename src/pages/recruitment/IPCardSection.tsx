@@ -181,7 +181,7 @@ export default function IPCardSection() {
                         />
                         <Stat
                           text={"Số lượng"}
-                          detail={item.qty}
+                          detail={item?.jobDetail?.qty}
                           color={"#FF5722"}
                         />
                         <Stat

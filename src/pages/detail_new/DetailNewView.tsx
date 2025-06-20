@@ -140,7 +140,9 @@ const DetailNewView = ({postDetail,postRelato}: any) => {
         {/* Animate các Card bài viết */}
         <Grid container spacing={3}>
           {postRelato.map((item) => (
-            <Grid item xs={12} sx={{cursor:"pointer"}}  onClick={() => navigate(`/detail-new?id=${item._id}`)} sm={6} md={4} key={item.id}>
+            <Grid item xs={12} sx={{cursor:"pointer"}}  onClick={() => navigate( item.type == "job"
+            ? `/detail-recruitment?id=${item._id}`
+            : `/detail-new?id=${item._id}`)} sm={6} md={4} key={item.id}>
               <motion.div
                 initial='hidden'
                 whileInView='visible'

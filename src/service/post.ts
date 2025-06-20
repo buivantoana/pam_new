@@ -16,6 +16,7 @@ type PostData = {
     salary: string;
     jobType: string;
     deadline: string;
+    qty:number;
   };
 };
 

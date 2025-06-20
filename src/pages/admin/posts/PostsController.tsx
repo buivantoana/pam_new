@@ -99,7 +99,8 @@ const PostsController = () => {
     status: "draft",
     publishedAt: "",
     categories: [] as string[],
-    jobDetail: { location: "", salary: "", jobType: "", deadline: "" },
+    jobDetail: { location: "", salary: "", jobType: "", deadline: "",qty:0 },
+    
   });
 
   const [snackbar, setSnackbar] = useState({
@@ -141,7 +142,8 @@ const PostsController = () => {
       status: "draft",
       publishedAt: "",
       categories: [],
-      jobDetail: { location: "", salary: "", jobType: "", deadline: "" },
+      jobDetail: { location: "", salary: "", jobType: "", deadline: "",qty:0 },
+      
     });
     setModalOpen(true);
   };
@@ -471,6 +473,24 @@ const PostsController = () => {
                           jobDetail: {
                             ...form.jobDetail,
                             salary: e.target.value,
+                          },
+                        })
+                      }
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      name='jobDetail.qty'
+                      label='Số lượng'
+                      fullWidth
+                      type="number"
+                      value={form.jobDetail?.qty }
+                      onChange={(e) =>
+                        setForm({
+                          ...form,
+                          jobDetail: {
+                            ...form.jobDetail,
+                            qty: e.target.value,
                           },
                         })
                       }

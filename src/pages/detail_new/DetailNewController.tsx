@@ -24,8 +24,8 @@ const DetailNewController = (props: Props) => {
    const resPosts = await getPostByID(id);
    if ( resPosts&& resPosts.status === 0) {
     const resPostRelato = await getAllPosts({categories:resPosts.data.categories.join(',')})
-    if(resPostRelato && resPostRelato.status == 0){
-      setPostRelato(resPostRelato.data)
+    if(resPostRelato && resPostRelato.status == 0&& resPostRelato.data.length>0){
+      setPostRelato(resPostRelato.data.filter((item)=>item._id != id).slice(0, 3))
     }
     setPostDetail(resPosts.data);
   }
