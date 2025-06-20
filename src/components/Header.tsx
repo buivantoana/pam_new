@@ -115,13 +115,13 @@ const Header = () => {
                   </MenuItem>
                   <MenuItem
                     onClick={() => {
-                      navigate("/chanel");
+                      navigate("/product");
                       handleMenuClose();
                     }}
                     sx={{
                       cursor: "pointer",
-                      color: currentPath === "/chanel" ? "#f26522" : "inherit",
-                      fontWeight: currentPath === "/chanel" ? "700" : "500",
+                      color: currentPath === "/product" ? "#f26522" : "inherit",
+                      fontWeight: currentPath === "/product" ? "700" : "500",
                     }}>
                     Hệ thống sản phẩm
                   </MenuItem>
@@ -201,13 +201,13 @@ const Header = () => {
                 alignItems='center'
                 sx={{
                   cursor: "pointer",
-                  color: currentPath === "/chanel" ? "#f26522" : "inherit",
-                  fontWeight: currentPath === "/chanel" ? "700" : "500",
+                  color: currentPath === "/product" ? "#f26522" : "inherit",
+                  fontWeight: currentPath === "/product" ? "700" : "500",
                 }}
                 // onClick={handleChannelClick}
-                onClick={()=>navigate("/chanel")}
+                onClick={()=>navigate("/product")}
                 >
-                <Typography variant='body1' fontWeight={currentPath === "/chanel" ? 700:500}>
+                <Typography variant='body1' fontWeight={currentPath === "/product" ? 700:500}>
                   Hệ thống sản phẩm
                 </Typography>
                 {/* <ExpandMoreIcon fontSize='small' /> */}
@@ -297,7 +297,7 @@ const Header = () => {
                 <MenuItem
                   onClick={() => {
                     handleChannelClose();
-                    navigate("/chanel");
+                    navigate("/product");
                   }}>
                   {item.name}
                 </MenuItem>

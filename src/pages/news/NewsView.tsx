@@ -31,7 +31,7 @@ const fadeSlideUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
-const NewsView = ({ posts, loading }) => {
+const NewsView = ({ posts, loading,type }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [search, setSearch] = useState("");
@@ -112,7 +112,7 @@ const NewsView = ({ posts, loading }) => {
           alignItems='center'
           mb={3}>
           <Typography variant='h3' fontWeight='bold' color='#FF6119'>
-            Tin tức
+            Tin tức {type == "job" && "tuyển dụng"}
           </Typography>
           <TextField
             placeholder='Search'

@@ -8,13 +8,15 @@ import {
 import React from "react";
 
 import IPCardSection from "./IPCardSection";
-import JobApplicationForm from "./JobApplicationForm";
+
 import vector1 from "../../images/Vector (1).png";
 import vector2 from "../../images/Vector (2).png";
 import vector3 from "../../images/Vector (3).png";
 import vector4 from "../../images/Vector.png";
 import vector5 from "../../images/Element 8.png";
 import vector6 from "../../images/khangia2.png";
+import JobApplicationForm from "./JobApplicationForm";
+
 type Props = {};
 
 const DetailRecruitmentView = ({postDetail}: any) => {
@@ -110,7 +112,7 @@ const DetailRecruitmentView = ({postDetail}: any) => {
           </Typography>
         </Box>
       </Container>
-      <JobApplicationForm />
+      <JobApplicationForm  />
       <IPCardSection />
     </Box>
   );

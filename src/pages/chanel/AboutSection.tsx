@@ -6,11 +6,15 @@ import {
   useMediaQuery,
   useTheme,
   Grid,
+  Stack,
 } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import AboutImage2 from "../../images/imagechanel.png";
 import { motion } from "framer-motion";
-
+import { RiTiktokFill } from "react-icons/ri";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import InstagramIcon from "@mui/icons-material/Instagram";
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
   visible: {
@@ -78,7 +82,7 @@ const AboutSection = ({ products }) => {
               : `Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry's standard dummy.`}
           </Typography>
-          <Button
+          {/* <Button
             variant='outlined'
             sx={{
               borderRadius: 20,
@@ -94,7 +98,42 @@ const AboutSection = ({ products }) => {
             }}
             endIcon={<ArrowForwardIcon />}>
             Liên Hệ Ngay
-          </Button>
+          </Button> */}
+          <Stack direction='row' spacing={2} justifyContent='start' mt={3}>
+          {[FacebookIcon, YouTubeIcon, RiTiktokFill, InstagramIcon].map(
+                  (IconComp, idx) => (
+                    <motion.div
+                      key={idx}
+                      whileHover={{ scale: 1.2, color: "#ff7043" }}
+                      style={{ display: "inline-block" }}>
+                      {IconComp === RiTiktokFill && (
+                        <RiTiktokFill
+                          onClick={()=>window.open(products?.socials?.tiktok, "_blank")}
+                          style={{ fontSize: 28, color: "#FF5722" }}
+                        />
+                      )}
+                      {IconComp === FacebookIcon && (
+                        <FacebookIcon
+                        onClick={()=>window.open(products?.socials?.facebook, "_blank")}
+                          style={{ fontSize: 28, color: "#FF5722" }}
+                        />
+                      )}
+                      {IconComp === YouTubeIcon && (
+                        <YouTubeIcon
+                        onClick={()=>window.open(products?.socials?.youtube, "_blank")}
+                          style={{ fontSize: 28, color: "#FF5722" }}
+                        />
+                      )}
+                      {IconComp === InstagramIcon && (
+                        <InstagramIcon
+                        onClick={()=>window.open(products?.socials?.instagram, "_blank")}
+                          style={{ fontSize: 28, color: "#FF5722" }}
+                        />
+                      )}
+                    </motion.div>
+                  )
+                )}
+              </Stack>
         </Grid>
       </Grid>
     </Box>

@@ -19,6 +19,7 @@ import icon2 from "../../images/Group.png";
 import icon3 from "../../images/Line element 2.png";
 import icon4 from "../../images/icon-right2.png";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const fadeInUp = (delay = 0) => ({
   hidden: { opacity: 0, y: 30 },
@@ -32,7 +33,7 @@ const fadeInUp = (delay = 0) => ({
 const Banner = ({ products }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
+  const navigate = useNavigate()
   return (
     <Box
       px={2}
@@ -123,12 +124,29 @@ const Banner = ({ products }) => {
                       key={idx}
                       whileHover={{ scale: 1.2, color: "#ff7043" }}
                       style={{ display: "inline-block" }}>
-                      {IconComp === RiTiktokFill ? (
+                      {IconComp === RiTiktokFill && (
                         <RiTiktokFill
+                          onClick={()=>window.open(products?.socials?.tiktok, "_blank")}
                           style={{ fontSize: 28, color: "#FF5722" }}
                         />
-                      ) : (
-                        <IconComp sx={{ fontSize: 29, color: "#FF5722" }} />
+                      )}
+                      {IconComp === FacebookIcon && (
+                        <FacebookIcon
+                        onClick={()=>window.open(products?.socials?.facebook, "_blank")}
+                          style={{ fontSize: 28, color: "#FF5722" }}
+                        />
+                      )}
+                      {IconComp === YouTubeIcon && (
+                        <YouTubeIcon
+                        onClick={()=>window.open(products?.socials?.youtube, "_blank")}
+                          style={{ fontSize: 28, color: "#FF5722" }}
+                        />
+                      )}
+                      {IconComp === InstagramIcon && (
+                        <InstagramIcon
+                        onClick={()=>window.open(products?.socials?.instagram, "_blank")}
+                          style={{ fontSize: 28, color: "#FF5722" }}
+                        />
                       )}
                     </motion.div>
                   )
@@ -144,7 +162,7 @@ const Banner = ({ products }) => {
                     : bannerRightBottom
                 }
                 alt='Avatar 4'
-                sx={{ width: isMobile ? "100%" : "500px" }}
+                sx={{ width: isMobile ? "100%" : "500px",borderRadius:"15px" }}
               />
             </motion.div>
           </Box>

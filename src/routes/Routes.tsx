@@ -42,7 +42,7 @@ const Router = () => {
           />
           <Route path='/news' element={<NewsController />} />
           <Route path='/detail-new' element={<DetailNewController />} />
-          <Route path='/chanel' element={<ChanelController />} />
+          <Route path='/product' element={<ChanelController />} />
         </Route>
         <Route
           path='/admin'

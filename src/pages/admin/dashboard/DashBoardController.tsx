@@ -148,7 +148,7 @@ const DashBoardController = (props: Props) => {
                       borderColor: "transparent", // Màu viền khi hover
                     },
                     "&.Mui-focused fieldset": {
-                      borderColor: theme.palette.active.main, // Màu viền khi focused
+                      borderColor: "#FF3300", // Màu viền khi focused
                     },
                   },
                   fontSize: "16px",
@@ -188,7 +188,7 @@ const DashBoardController = (props: Props) => {
                       borderColor: "transparent", // Màu viền khi hover
                     },
                     "&.Mui-focused fieldset": {
-                      borderColor: theme.palette.active.main, // Màu viền khi focused
+                      borderColor: "#FF3300", // Màu viền khi focused
                     },
                   },
                   fontSize: "16px",
@@ -199,7 +199,16 @@ const DashBoardController = (props: Props) => {
               type='submit'
               fullWidth
               variant='contained'
-              sx={{ mt: 3, mb: 2, background: theme.palette.active.main }}>
+              sx={{ mt: 3, mb: 2,  background: "linear-gradient(90deg, #FF6600, #FF3300)",
+              borderRadius: 999,
+              px: 4,
+              py: 1,
+              textTransform: "none",
+              fontWeight: "bold",
+              fontSize: 16,
+             
+              minWidth: 180,
+              position: "relative",}}>
               Đăng nhập
             </Button>
           </Box>

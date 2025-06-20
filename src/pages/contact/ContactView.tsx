@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import React from "react";
 import vector1 from "../../images/Vector (1).png";
 import vector2 from "../../images/Vector (2).png";
@@ -95,6 +95,7 @@ const ContactView = (props: any) => {
         </Typography>
       </motion.div>
       <JobApplicationForm />
+      <LocationInfo />
     </Box>
   );
 };
@@ -112,6 +113,9 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
+import LocationInfo from "./LocationInfo";
+import { toast } from "react-toastify";
+import { submitJobApplication } from "../../service/contact";
 
 const positions = [
   "Chuyên viên nhân sự",
@@ -154,9 +158,29 @@ function JobApplicationForm() {
   const handleFileChange = (e) => {
     setForm((prev) => ({ ...prev, file: e.target.files[0] }));
   };
-
-  const handleSubmit = () => {
-    console.log(form);
+  const [loading, setLoading] = useState(false);
+  const handleSubmit = async () => {
+    if (!form.name || !form.email || !form.phone || !form.position || !form.file) {
+      toast.error("Vui lòng điền đầy đủ thông tin và đính kèm file!");
+      return;
+    }
+    setLoading(true);
+    try {
+      const res = await submitJobApplication(form);
+      toast.success("Ứng tuyển thành công!");
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        position: "",
+        file: null,
+      });
+    } catch (err) {
+      console.error(err);
+      toast.error("Gửi ứng tuyển thất bại. Vui lòng thử lại!");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -277,6 +301,7 @@ function JobApplicationForm() {
               <Button
                 onClick={handleSubmit}
                 variant='contained'
+                disabled={loading}
                 sx={{
                   background: "linear-gradient(90deg, #FF6600, #FF3300)",
                   borderRadius: 999,
@@ -286,9 +311,22 @@ function JobApplicationForm() {
                   fontWeight: "bold",
                   fontSize: 16,
                   mt: 1,
-                }}>
-                Ứng Tuyển Ngay
+                  minWidth: 180,
+                  position: "relative",
+                }}
+              >
+                {loading ? (
+                  <CircularProgress
+                    size={24}
+                    sx={{
+                      color: "white",
+                    }}
+                  />
+                ) : (
+                  "Ứng Tuyển Ngay"
+                )}
               </Button>
+
             </motion.div>
           </Grid>
         </Grid>

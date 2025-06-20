@@ -34,7 +34,7 @@ const fadeIn = (direction = "up", delay = 0) => ({
   },
 });
 
-const AboutSection = ({ image }) => {
+const AboutSection = ({ image ,handleScroll}) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -146,6 +146,7 @@ const AboutSection = ({ image }) => {
                   standard dummy text.`}
                 </Typography>
                 <Button
+                onClick={handleScroll}
                   variant='outlined'
                   sx={{
                     borderRadius: 20,
@@ -160,7 +161,7 @@ const AboutSection = ({ image }) => {
                     },
                   }}
                   endIcon={<ArrowForwardIcon />}>
-                  Tìm Việc Ngay
+                  Ứng tuyển ngay
                 </Button>
               </motion.div>
             </Grid>
@@ -271,6 +272,7 @@ const AboutSection = ({ image }) => {
                  
                 </Box>
                 <Button
+                onClick={handleScroll}
                   variant='outlined'
                   sx={{
                     borderRadius: 20,
@@ -285,7 +287,7 @@ const AboutSection = ({ image }) => {
                     },
                   }}
                   endIcon={<ArrowForwardIcon />}>
-                  Tham Gia Ngay
+                  Ứng tuyển ngay
                 </Button>
               </motion.div>
             </Grid>

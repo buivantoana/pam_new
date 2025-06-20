@@ -24,7 +24,7 @@ const NewsController = (props) => {
     if (resPosts && resPosts.status === 0) setPosts(resPosts.data);
     setLoading(false);
   };
-  return <NewsView loading={loading} posts={posts} />;
+  return <NewsView loading={loading} type={type} posts={posts} />;
 };
 
 export default NewsController;

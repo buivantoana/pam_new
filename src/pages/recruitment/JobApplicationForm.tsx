@@ -9,9 +9,12 @@ import {
   InputAdornment,
   useTheme,
   useMediaQuery,
+  CircularProgress,
 } from "@mui/material";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import { motion } from "framer-motion";
+import { toast } from "react-toastify";
+import { submitJobApplication } from "../../service/contact";
 
 const positions = [
   "Chuyên viên nhân sự",
@@ -35,7 +38,7 @@ const fadeInUp = (delay = 0) => ({
   },
 });
 
-export default function JobApplicationForm() {
+export default function JobApplicationForm({targetRef}) {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -56,9 +59,31 @@ export default function JobApplicationForm() {
     setForm((prev) => ({ ...prev, file: e.target.files[0] }));
   };
 
-  const handleSubmit = () => {
-    console.log(form);
+  const [loading, setLoading] = useState(false);
+  const handleSubmit = async () => {
+    if (!form.name || !form.email || !form.phone || !form.position || !form.file) {
+      toast.error("Vui lòng điền đầy đủ thông tin và đính kèm file!");
+      return;
+    }
+    setLoading(true);
+    try {
+      const res = await submitJobApplication(form);
+      toast.success("Ứng tuyển thành công!");
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        position: "",
+        file: null,
+      });
+    } catch (err) {
+      console.error(err);
+      toast.error("Gửi ứng tuyển thất bại. Vui lòng thử lại!");
+    } finally {
+      setLoading(false);
+    }
   };
+
 
   return (
     <motion.div
@@ -74,6 +99,7 @@ export default function JobApplicationForm() {
         },
       }}>
       <Box
+        ref={targetRef}
         sx={{
           px: 2,
           py: 4,
@@ -175,9 +201,10 @@ export default function JobApplicationForm() {
           </Grid>
           <Grid item xs={12}>
             <motion.div variants={fadeInUp(0.6)}>
-              <Button
+            <Button
                 onClick={handleSubmit}
                 variant='contained'
+                disabled={loading}
                 sx={{
                   background: "linear-gradient(90deg, #FF6600, #FF3300)",
                   borderRadius: 999,
@@ -187,8 +214,20 @@ export default function JobApplicationForm() {
                   fontWeight: "bold",
                   fontSize: 16,
                   mt: 1,
-                }}>
-                Ứng Tuyển Ngay
+                  minWidth: 180,
+                  position: "relative",
+                }}
+              >
+                {loading ? (
+                  <CircularProgress
+                    size={24}
+                    sx={{
+                      color: "white",
+                    }}
+                  />
+                ) : (
+                  "Ứng Tuyển Ngay"
+                )}
               </Button>
             </motion.div>
           </Grid>
