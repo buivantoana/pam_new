@@ -154,7 +154,7 @@ const Header = () => {
                   </MenuItem>
                   <MenuItem
                     onClick={() => {
-                      navigate("/news");
+                      navigate("/news?type=news");
                       handleMenuClose();
                     }}
                     sx={{

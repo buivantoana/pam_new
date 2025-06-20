@@ -92,7 +92,7 @@ const Footer = () => {
               <Link href='/recruitment' underline='none' color='textPrimary'>
                 Tuyển dụng
               </Link>
-              <Link href='/news' underline='none' color='textPrimary'>
+              <Link href='/news?type=news' underline='none' color='textPrimary'>
                 Tin tức
               </Link>
             </Box>
