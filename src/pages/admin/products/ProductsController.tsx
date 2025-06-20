@@ -19,6 +19,8 @@ import {
   Typography,
   Container,
   Grid,
+  TableFooter,
+  TablePagination,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -34,7 +36,7 @@ import { uploadImage } from "../../../service/uploadService";
 import Loading from "../../../components/Loading";
 
 type Product = {
- 
+  _id: string;
   name: string;
   description: string;
   avatar: string;
@@ -60,7 +62,7 @@ const ProductController = () => {
   const [imageUrl, setImageUrl] = useState("");
   const [file, setFile]: any = useState(null);
   const [form, setForm] = useState<Product>({
-   
+    _id: "",
     name: "",
     description: "",
     avatar: "",
@@ -75,6 +77,11 @@ const ProductController = () => {
     },
   });
 
+  // Pagination state
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [totalProducts, setTotalProducts] = useState(0);
+
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: "",
@@ -87,7 +94,10 @@ const ProductController = () => {
   const fetchAll = async () => {
     setLoading(true);
     const resProducts = await getAllProducts();
-    if (resProducts && resProducts.status === 0) setProducts(resProducts.data);
+    if (resProducts && resProducts.status === 0) {
+      setProducts(resProducts.data);
+      setTotalProducts(resProducts.data.length); // Set total number of products
+    }
     setLoading(false);
   };
 
@@ -111,7 +121,7 @@ const ProductController = () => {
   const openAdd = () => {
     setEditProduct(null);
     setForm({
-     
+      _id: "",
       name: "",
       description: "",
       avatar: "",
@@ -216,6 +226,19 @@ const ProductController = () => {
     }
   };
 
+  // Pagination handlers
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  // Avoid a layout jump when reaching the last page with empty rows.
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - totalProducts) : 0;
+
   return (
     <>
       {loadingCreate && <Loading />}
@@ -247,32 +270,51 @@ const ProductController = () => {
                   </TableCell>
                 </TableRow>
               )}
-              {products.map((p) => (
-                <TableRow key={p._id}>
-                  <TableCell>{p.name}</TableCell>
-                  <TableCell>
-                    <img
-                      src={p.avatar}
-                      width={50}
-                      height={50}
-                      style={{ borderRadius: "5px" }}
-                      alt=""
-                    />
-                  </TableCell>
-                  <TableCell>{p.subscribers}</TableCell>
-                  <TableCell>{p.views}</TableCell>
-                  <TableCell>{p.videos}</TableCell>
-                  <TableCell align="right">
-                    <IconButton onClick={() => openEdit(p)}>
-                      <EditIcon />
-                    </IconButton>
-                    <IconButton onClick={() => openDump(p._id)}>
-                      <DeleteIcon />
-                    </IconButton>
-                  </TableCell>
+              {products
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((p) => (
+                  <TableRow key={p._id}>
+                    <TableCell>{p.name}</TableCell>
+                    <TableCell>
+                      <img
+                        src={p.avatar}
+                        width={50}
+                        height={50}
+                        style={{ borderRadius: "5px" }}
+                        alt=""
+                      />
+                    </TableCell>
+                    <TableCell>{p.subscribers}</TableCell>
+                    <TableCell>{p.views}</TableCell>
+                    <TableCell>{p.videos}</TableCell>
+                    <TableCell align="right">
+                      <IconButton onClick={() => openEdit(p)}>
+                        <EditIcon />
+                      </IconButton>
+                      <IconButton onClick={() => openDump(p._id)}>
+                        <DeleteIcon />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              {emptyRows > 0 && (
+                <TableRow style={{ height: 53 * emptyRows }}>
+                  <TableCell colSpan={6} />
                 </TableRow>
-              ))}
+              )}
             </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  rowsPerPageOptions={[5, 10, 25]}
+                  count={totalProducts}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+              </TableRow>
+            </TableFooter>
           </Table>
         </TableContainer>
 

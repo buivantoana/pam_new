@@ -130,6 +130,7 @@ const LayoutAdmin = () => {
     category: false,
     product: false,
     company: false,
+    mail: false,
   });
   const [openImageMenu, setOpenImageMenu] = useState(false);
   const [selectedItem, setSelectedItem] = useState("");
@@ -145,6 +146,7 @@ const LayoutAdmin = () => {
         post: true,
         product: false,
         company: false,
+        mail: false,
       });
     }
     if (location.pathname && location.pathname == "/admin/category") {
@@ -154,6 +156,7 @@ const LayoutAdmin = () => {
         post: false,
         product: false,
         company: false,
+        mail: false,
       });
     }
     if (location.pathname && location.pathname == "/admin/product") {
@@ -163,6 +166,7 @@ const LayoutAdmin = () => {
         post: false,
         product: true,
         company: false,
+        mail: false,
       });
     }
     if (location.pathname && location.pathname == "/admin/company") {
@@ -172,6 +176,17 @@ const LayoutAdmin = () => {
         post: false,
         product: false,
         company: true,
+        mail: false,
+      });
+    }
+    if (location.pathname && location.pathname == "/admin/mail-config") {
+      setActive({
+        image: false,
+        category: false,
+        post: false,
+        product: false,
+        company: false,
+        mail: true,
       });
     }
     if (
@@ -516,6 +531,32 @@ const LayoutAdmin = () => {
                 </Collapse>
               </List>
 
+              <Divider />
+              <Divider />
+              <List sx={{ px: "10px" }}>
+                <ListItem
+                  sx={{
+                    a: {
+                      color: "white",
+                      width: "100%",
+                      textDecoration: "none",
+                    },
+                    background: active.mail ? "#2e3650" : undefined,
+                    border: active.mail ? "1px solid #4c5680" : "none",
+                    borderRadius: active.mail ? "5px" : "none",
+                  }}
+                  disablePadding>
+                  <Link to={"/admin/mail-config"}>
+                    <CustomListItemButton>
+                      <ListItemIcon
+                        sx={{ display: "flex", justifyContent: "center" }}>
+                        <RiHotelLine color={"white"} />
+                      </ListItemIcon>
+                      <ListItemText primary={"Cài đặt Mail"} />
+                    </CustomListItemButton>
+                  </Link>
+                </ListItem>
+              </List>
               <Divider />
             </Box>
           </Drawer>

@@ -26,6 +26,8 @@ import {
   InputLabel,
   FormControl,
   Stack,
+  TableFooter,
+  TablePagination,
 } from "@mui/material";
 import { Editor } from "@tinymce/tinymce-react";
 import EditIcon from "@mui/icons-material/Edit";
@@ -67,6 +69,9 @@ const PostsController = () => {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [file, setFile]: any = useState(null);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [totalPosts, setTotalPosts] = useState(0);
   const handleImageChange = (e: any) => {
     let file = e.target.files[0];
 
@@ -113,7 +118,10 @@ const PostsController = () => {
     console.log("toam2", resCats);
     if (resCats && resCats.status === 0) setCategories(resCats.data);
     const resPosts = await getAllPosts();
-    if (resPosts && resPosts.status === 0) setPosts(resPosts.data);
+    if (resPosts && resPosts.status === 0) {
+      setTotalPosts(resPosts.data.length);
+      setPosts(resPosts.data);
+    }
     setLoading(false);
   };
 
@@ -258,6 +266,17 @@ const PostsController = () => {
     await Promise.all(uploadPromises);
     return doc.body.innerHTML;
   };
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  // Avoid a layout jump when reaching the last page with empty rows
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - totalPosts) : 0;
   return (
     <>
       {loadingCreate && <Loading />}
@@ -283,42 +302,62 @@ const PostsController = () => {
             <TableBody>
               {posts.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={4} align='center'>
+                  <TableCell colSpan={5} align='center'>
                     {loading ? "Đang tải..." : "Chưa có bài viết"}
                   </TableCell>
                 </TableRow>
               )}
-              {posts.map((p) => (
-                <TableRow key={p._id}>
-                  <TableCell>{p.title}</TableCell>
-                  <TableCell>
-                    <img
-                      src={p.imageUrl}
-                      width={50}
-                      height={50}
-                      style={{ borderRadius: "5px" }}
-                    />
-                  </TableCell>
-                  <TableCell>{p.type}</TableCell>
-                  <TableCell>
-                    {p.categories
-                      .map((sl) => {
-                        const c = categories.find((ct) => ct.slug === sl);
-                        return c?.name || sl;
-                      })
-                      .join(", ")}
-                  </TableCell>
-                  <TableCell align='right'>
-                    <IconButton onClick={() => openEdit(p)}>
-                      <EditIcon />
-                    </IconButton>
-                    <IconButton onClick={() => openDump(p._id)}>
-                      <DeleteIcon />
-                    </IconButton>
-                  </TableCell>
+              {posts
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((p) => (
+                  <TableRow key={p._id}>
+                    <TableCell>{p.title}</TableCell>
+                    <TableCell>
+                      <img
+                        src={p.imageUrl}
+                        width={50}
+                        height={50}
+                        style={{ borderRadius: "5px" }}
+                        alt=""
+                      />
+                    </TableCell>
+                    <TableCell>{p.type}</TableCell>
+                    <TableCell>
+                      {p.categories
+                        .map((sl) => {
+                          const c = categories.find((ct) => ct.slug === sl);
+                          return c?.name || sl;
+                        })
+                        .join(", ")}
+                    </TableCell>
+                    <TableCell align='right'>
+                      <IconButton onClick={() => openEdit(p)}>
+                        <EditIcon />
+                      </IconButton>
+                      <IconButton onClick={() => openDump(p._id)}>
+                        <DeleteIcon />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              {emptyRows > 0 && (
+                <TableRow style={{ height: 53 * emptyRows }}>
+                  <TableCell colSpan={5} />
                 </TableRow>
-              ))}
+              )}
             </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  rowsPerPageOptions={[5, 10, 25]}
+                  count={totalPosts}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+              </TableRow>
+            </TableFooter>
           </Table>
         </TableContainer>
 

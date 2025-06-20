@@ -24,6 +24,7 @@ import CooperateImageController from "../pages/admin/image/CooperateImageControl
 import ContactController from "../pages/contact/ContactController";
 import ProductController from "../pages/admin/products/ProductsController";
 import CompanyController from "../pages/admin/company/CompanyController";
+import MailConfigController from "../pages/admin/mail/MailConfigController";
 
 const Router = () => {
   const context: any = useCoursesContext();
@@ -56,6 +57,7 @@ const Router = () => {
           <Route path='product' element={<ProductController />} />
           <Route path='post' element={<PostsController />} />
           <Route path='home-image' element={<HomeController />} />
+          <Route path='mail-config' element={<MailConfigController />} />
           <Route
             path='recruitment-image'
             element={<RecruitmentImageController />}
