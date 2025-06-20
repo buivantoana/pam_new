@@ -236,7 +236,7 @@ const Header = () => {
               </Typography>
 
               <Typography
-                onClick={() => navigate("/news")}
+                onClick={() => navigate("/news?type=news")}
                 variant='body1'
                 fontWeight={500}
                 sx={{
